@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Mole: Enemy
+public class SageMole: Enemy
 {
 	#region SM Variables
 	private EnemyIdleState _idleState;
@@ -18,14 +18,14 @@ public class Mole: Enemy
 	[SerializeField] private EnemyIdleSOBase _enemyIdleVisibleBase;
 	[SerializeField] private EnemyUpSOBase _enemyUpBase;
 	[SerializeField] private EnemyDownSOBase _enemyDownBase;
-	[SerializeField] private EnemyEscapedSOBase _enemyEscapedDoDamageBase;
+	[SerializeField] private EnemyEscapedSOBase _enemyEscapedBase;
 	[SerializeField] private EnemyDeathSOBase _enemyDeathBase;
 
 	private EnemyIdleSOBase EnemyIdleHiddenBaseInstance;
 	private EnemyIdleSOBase EnemyIdleVisibleBaseInstance;
 	private EnemyUpSOBase EnemyUpBaseInstance;
 	private EnemyDownSOBase EnemyDownBaseInstance;
-	private EnemyEscapedSOBase EnemyEscapedDoDamageBaseInstance;
+	private EnemyEscapedSOBase EnemyEscapedBaseInstance;
 	private EnemyDeathSOBase EnemyDeathBaseInstance;
 
 	#endregion
@@ -40,7 +40,7 @@ public class Mole: Enemy
 		EnemyIdleVisibleBaseInstance = Instantiate(_enemyIdleVisibleBase);
 		EnemyUpBaseInstance = Instantiate(_enemyUpBase);
 		EnemyDownBaseInstance = Instantiate(_enemyDownBase);
-		EnemyEscapedDoDamageBaseInstance = Instantiate(_enemyEscapedDoDamageBase);
+		EnemyEscapedBaseInstance = Instantiate(_enemyEscapedBase);
 		EnemyDeathBaseInstance = Instantiate(_enemyDeathBase);
 
 		_idleState = new EnemyIdleState(this, base.stateMachine, IEnemy.MachineBehavior.IdleHidden);
@@ -58,7 +58,7 @@ public class Mole: Enemy
 		EnemyIdleVisibleBaseInstance.Initialize(gameObject, this);
 		EnemyUpBaseInstance.Initialize(gameObject, this);
 		EnemyDownBaseInstance.Initialize(gameObject, this);
-		EnemyEscapedDoDamageBaseInstance.Initialize(gameObject, this);
+		EnemyEscapedBaseInstance.Initialize(gameObject, this);
 		EnemyDeathBaseInstance.Initialize(gameObject, this);
 
 		base.stateMachine.Initialize(_idleState, IEnemy.MachineBehavior.IdleHidden);
@@ -97,8 +97,8 @@ public class Mole: Enemy
 				return EnemyUpBaseInstance;
 			case IEnemy.MachineBehavior.Down:
 				return EnemyDownBaseInstance;
-			case IEnemy.MachineBehavior.EscapedDoDamage:
-				return EnemyEscapedDoDamageBaseInstance;
+			case IEnemy.MachineBehavior.Escaped:
+				return EnemyEscapedBaseInstance;
 			case IEnemy.MachineBehavior.Death:
 				return EnemyDeathBaseInstance;
 
