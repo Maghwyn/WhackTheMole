@@ -25,7 +25,8 @@ public class EnemyEscaped : EnemyEscapedSOBase
 	{
 		base.DoFrameUpdateLogic();
 
-		Destroy(enemy);
+		enemy.InvokeOnSelfDestroy();
+		Destroy(enemy.gameObject);
 	}
 
 	public override void DoPhysicsLogic()

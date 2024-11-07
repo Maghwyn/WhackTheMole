@@ -22,7 +22,8 @@ public class EnemyDeath : EnemyDeathSOBase
 	{
 		base.DoFrameUpdateLogic();
 
-		Destroy(enemy);
+		enemy.InvokeOnSelfDestroy();
+		Destroy(enemy.gameObject);
 	}
 
 	public override void DoPhysicsLogic()

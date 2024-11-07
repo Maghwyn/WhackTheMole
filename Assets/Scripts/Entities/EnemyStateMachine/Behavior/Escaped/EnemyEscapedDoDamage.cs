@@ -25,8 +25,8 @@ public class EnemyEscapedDoDamage : EnemyEscapedSOBase
 	{
 		base.DoFrameUpdateLogic();
 
-		// TODO: Change the score value
-		Destroy(enemy);
+		enemy.InvokeOnSelfDestroy();
+		Destroy(enemy.gameObject);
 	}
 
 	public override void DoPhysicsLogic()

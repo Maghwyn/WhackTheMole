@@ -262,9 +262,10 @@ GameObject:
   - component: {fileID: 1885534445667924193}
   - component: {fileID: 3782357939512832740}
   - component: {fileID: 6552778967106164175}
+  - component: {fileID: 3614339493160815207}
   m_Layer: 0
   m_Name: EvilMole
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3468923353853503215}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -292,7 +293,7 @@ Transform:
   - {fileID: 8107605871415655766}
   - {fileID: 5848225656120944654}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!114 &125507322585193877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,14 +357,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.001
+  m_Height: 0.0025
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.0008}
 --- !u!114 &6552778967106164175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,12 +377,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46303a400146149a69fde0dc025653f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useDOTween: 1
-  _movementDuration: 2
-  _movementEase: 4
-  _upperTarget: {fileID: 0}
-  _lowerTarget: {fileID: 0}
-  _speed: 5
+  _useDOTween: 0
+  _movementDuration: 1
+  _movementEase: 1
+  _speed: 15
+--- !u!114 &3614339493160815207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3468923353853503215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621cebc64edc34f37819fa0c1accc78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3960141622624512249
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,11 +44,11 @@ public class EnemyDown : EnemyDownSOBase
 
 		if (!isPositionReached) return;
 
-		if (enemy.CompareTag("Mole"))
+		if (enemy.gameObject.CompareTag("Mole"))
 		{
 			enemy.stateMachine.ChangeState(enemy.GetState(IEnemy.MachineState.Escaped), IEnemy.MachineBehavior.EscapedDoDamage);
 		}
-		else if (enemy.CompareTag("SafeMole"))
+		else if (enemy.gameObject.CompareTag("SafeMole"))
 		{
 			enemy.stateMachine.ChangeState(enemy.GetState(IEnemy.MachineState.Escaped), IEnemy.MachineBehavior.Escaped);
 		}
