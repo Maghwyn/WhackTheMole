@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 	private Rigidbody _rb;
 
 	public enum MovementDirection { Up, Down }
+	public event Action OnPositionReached;
 
 	private void Awake()
 	{
@@ -40,7 +42,11 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 		Transform target = direction == MovementDirection.Up ? _upperTarget : _lowerTarget;
 
 		transform.DOMove(target.position, _movementDuration)
-			.SetEase(_movementEase);
+			.SetEase(_movementEase)
+			.OnComplete(() =>
+			{
+				OnPositionReached?.Invoke();
+			});
 	}
 
 	private void PerformMovementVelocity(MovementDirection direction)
@@ -58,6 +64,7 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 		if (distance < 0.1f)
 		{
 			_rb.velocity = Vector3.zero;
+			OnPositionReached?.Invoke();
 		}
 	}
 }

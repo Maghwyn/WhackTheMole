@@ -22,6 +22,7 @@ public class EnemyIdleHidden : EnemyIdleSOBase
 	public override void DoFrameUpdateLogic()
 	{
 		base.DoFrameUpdateLogic();
+		stateTime += Time.deltaTime;
 
 		DoStateChange();
 	}
@@ -29,15 +30,16 @@ public class EnemyIdleHidden : EnemyIdleSOBase
 	public override void DoPhysicsLogic()
 	{
 		base.DoPhysicsLogic();
-
-		// Perform movement
 	}
 
 	public override void DoStateChange()
 	{
 		base.DoStateChange();
 
-		// If Z transform hasn't reached the point (don't do anything)
+		if (stateTime >= stateDuration)
+		{
+			enemy.stateMachine.ChangeState(enemy.GetState(IEnemy.MachineState.Up), IEnemy.MachineBehavior.Up);
+		}
 	}
 
 	public override void DoAnimationStartLogic()

@@ -6,11 +6,17 @@ public class EnemyIdleSOBase : ScriptableObject, IEnemyBehavior
 	protected Transform transform;
 	protected GameObject gameObject;
 
+	protected float stateTime;
+    protected float stateDuration;
+
 	public virtual void Initialize(GameObject gameObject, Enemy enemy)
 	{
 		this.enemy = enemy;
 		this.gameObject = gameObject;
 		transform = gameObject.transform;
+
+		stateTime = 0f;
+		stateDuration = 0.5f;
 	}
 
 	public virtual void DoEnterLogic() {}
@@ -21,5 +27,9 @@ public class EnemyIdleSOBase : ScriptableObject, IEnemyBehavior
 	public virtual void DoAnimationStartLogic() {}
 	public virtual void DoAnimationSoundTriggerEventLogic() {}
 	public virtual void DoAnimationEndTriggerEventLogic() {}
-	public virtual void ResetValues() {}
+	public virtual void ResetValues()
+	{
+		stateTime = 0f;
+		stateDuration = 0.5f;
+	}
 }
