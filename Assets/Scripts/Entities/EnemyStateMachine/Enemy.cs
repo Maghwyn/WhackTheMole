@@ -8,10 +8,6 @@ public class Enemy: MonoBehaviour, IEnemy
 	public EnemyStateMachine stateMachine { get; protected set; }
 	#endregion
 
-	#region PREFAB CACHED COMPONENTS
-	private Dictionary<IEnemy.MachineBehavior, GameObject> _attackPrefabsCache;
-	#endregion
-
 	#region MECHANICS
 	public EnemyMovementMechanic movement { get ; protected set; }
 	#endregion
@@ -49,17 +45,7 @@ public class Enemy: MonoBehaviour, IEnemy
 	#region STATE MACHINE SET STATE
 	public virtual EnemyState GetState(IEnemy.MachineState state) { return null; }
 	public virtual IEnemyBehavior GetStateBehavior(IEnemy.MachineBehavior behavior) { return null; }
-	#endregion
-
-	#region PREFABS
-	public GameObject GetAttackPrefabForBehavior(IEnemy.MachineBehavior behavior)
-	{
-		if (_attackPrefabsCache.TryGetValue(behavior, out GameObject prefab))
-			return prefab;
-			
-		Debug.LogWarning($"No attack prefab found for behavior: {behavior.HumanName()}");
-		return null;
-	}
+	public virtual void ForceKill() {}
 	#endregion
 
 	#region ENUM SETTINGS

@@ -10,6 +10,7 @@ public interface IEnemy
 		Up,
 		Down,
 		Escaped,
+		Death,
 	}
 
 	public enum MachineBehavior {
@@ -19,5 +20,6 @@ public interface IEnemy
 		Down,
 		EscapedDoDamage,
 		Escaped,
+		Death,
 	}
 }
