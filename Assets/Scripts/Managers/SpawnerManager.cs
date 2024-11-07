@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
+using Random = UnityEngine.Random;
 
 public class SpawnerManager : MonoBehaviour
 {
@@ -19,9 +21,11 @@ public class SpawnerManager : MonoBehaviour
 	[SerializeField] private FloatVariable _gameHP;
 	[SerializeField] private FloatVariable _rate;
 
+	private Quaternion _moleRotation = Quaternion.Euler(-90, 0, 180);
 	private float _currentSpawnInterval;
 	private readonly Dictionary<int, GameObject> _enemies = new();
 
+	[Serializable]
 	public class MoleHole
 	{
 		public int index;
@@ -63,11 +67,11 @@ public class SpawnerManager : MonoBehaviour
 		GameObject enemy;
 		if (Random.value < _safeMoleSpawnRate)
 		{
-			enemy = Instantiate(_safeMolePrefab, moleHole.transform.position, Quaternion.identity);
+			enemy = Instantiate(_safeMolePrefab, moleHole.transform.position, _moleRotation);
 		}
 		else
 		{
-			enemy = Instantiate(_molePrefab, moleHole.transform.position, Quaternion.identity);
+			enemy = Instantiate(_molePrefab, moleHole.transform.position, _moleRotation);
 		}
 		_enemies[moleHole.index] = enemy;
 	}

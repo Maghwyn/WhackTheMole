@@ -92,6 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5017876760931894694}
+  - component: {fileID: 3698037431595426373}
+  - component: {fileID: 957365208308496017}
+  - component: {fileID: 7324715518919280754}
+  - component: {fileID: 2089872874021825089}
   m_Layer: 0
   m_Name: SurrenderMole
   m_TagString: Untagged
@@ -107,8 +111,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2365200803730001687}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.32, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -123,6 +127,94 @@ Transform:
   - {fileID: 2865044082588378758}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3698037431595426373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365200803730001687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b4486a43b2f47a59243897248c7a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyIdleHiddenBase: {fileID: 11400000, guid: 4abf3876f1e454942b365a5e4adb4d95,
+    type: 2}
+  _enemyIdleVisibleBase: {fileID: 11400000, guid: 51912224404f3824883c26af352ffd96,
+    type: 2}
+  _enemyUpBase: {fileID: 11400000, guid: b62a645f25f3f2347b77fb863d6a8935, type: 2}
+  _enemyDownBase: {fileID: 11400000, guid: 48a64b4f54d6d984c832d88abfc70814, type: 2}
+  _enemyEscapedBase: {fileID: 11400000, guid: 9aad78a8742984941b22324d7ff54f7d, type: 2}
+  _enemyDeathBase: {fileID: 11400000, guid: 0263d88bc711e9942be662d40bfb7bec, type: 2}
+--- !u!54 &957365208308496017
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365200803730001687}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &7324715518919280754
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365200803730001687}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2089872874021825089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365200803730001687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46303a400146149a69fde0dc025653f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useDOTween: 1
+  _movementDuration: 2
+  _movementEase: 4
+  _upperTarget: {fileID: 0}
+  _lowerTarget: {fileID: 0}
+  _speed: 5
 --- !u!1 &2836977254244112483
 GameObject:
   m_ObjectHideFlags: 0
