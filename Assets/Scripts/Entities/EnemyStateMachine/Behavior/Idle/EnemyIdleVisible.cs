@@ -12,6 +12,7 @@ public class EnemyIdleVisible : EnemyIdleSOBase
 	public override void DoEnterLogic()
 	{
 		base.DoEnterLogic();
+		stateDuration = 1f;
 	}
 
 	public override void DoExitLogic()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using Random = UnityEngine.Random;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class SpawnerManager : MonoBehaviour
 {
@@ -23,13 +25,15 @@ public class SpawnerManager : MonoBehaviour
 
 	private Quaternion _moleRotation = Quaternion.Euler(-90, 0, 180);
 	private float _currentSpawnInterval;
-	private readonly Dictionary<int, GameObject> _enemies = new();
+	private readonly Dictionary<int, Enemy> _enemies = new();
 
 	[Serializable]
 	public class MoleHole
 	{
 		public int index;
-		public Transform transform;
+		public Transform spawnTransform;
+		public Transform upperTransform;
+		public Transform lowerTransform;
 	}
 
 	private void Start()
@@ -64,15 +68,14 @@ public class SpawnerManager : MonoBehaviour
 	private void SpawnEnemy()
 	{
 		MoleHole moleHole = GetRandomFreeMoleHole();
-		GameObject enemy;
-		if (Random.value < _safeMoleSpawnRate)
-		{
-			enemy = Instantiate(_safeMolePrefab, moleHole.transform.position, _moleRotation);
-		}
-		else
-		{
-			enemy = Instantiate(_molePrefab, moleHole.transform.position, _moleRotation);
-		}
+		GameObject prefab = Random.value < _safeMoleSpawnRate ? _safeMolePrefab : _molePrefab;
+
+		GameObject enemyGO = Instantiate(prefab, moleHole.spawnTransform.position, _moleRotation);
+		Enemy enemy = enemyGO.GetComponent<Enemy>();
+		enemy.movement.InitializeMaxMinPosition(moleHole.upperTransform.position, moleHole.lowerTransform.position);
+
+		enemy.OnSelfDestroy += () => OnEnemyDestroy(moleHole.index);
+
 		_enemies[moleHole.index] = enemy;
 	}
 
@@ -90,8 +93,13 @@ public class SpawnerManager : MonoBehaviour
 	{
 		foreach (var enemy in _enemies.Values)
 		{
-			enemy.GetComponent<Enemy>().ForceKill();
+			enemy.Kill();
 		}
 		_enemies.Clear();
+	}
+
+	private void OnEnemyDestroy(int keyIndex)
+	{
+		_enemies.Remove(keyIndex);
 	}
 }

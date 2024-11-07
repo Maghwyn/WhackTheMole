@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Enemy: MonoBehaviour, IEnemy
 	#region MECHANICS
 	public EnemyMovementMechanic movement { get ; protected set; }
 	#endregion
+
+	public event Action OnSelfDestroy;
 
 	protected virtual void AnimationSoundTriggerEvent(IEnemy.MachineState animationTriggerType)
 	{
@@ -45,8 +48,13 @@ public class Enemy: MonoBehaviour, IEnemy
 	#region STATE MACHINE SET STATE
 	public virtual EnemyState GetState(IEnemy.MachineState state) { return null; }
 	public virtual IEnemyBehavior GetStateBehavior(IEnemy.MachineBehavior behavior) { return null; }
-	public virtual void ForceKill() {}
+	public virtual void Kill() {}
 	#endregion
+
+	public void InvokeOnSelfDestroy()
+	{
+		OnSelfDestroy?.Invoke();
+	}
 
 	#region ENUM SETTINGS
 

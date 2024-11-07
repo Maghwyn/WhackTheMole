@@ -108,7 +108,7 @@ public class Mole: Enemy
 		}
 	}
 
-	public override void ForceKill()
+	public override void Kill()
 	{
 		base.stateMachine.ChangeState(GetState(IEnemy.MachineState.Death), IEnemy.MachineBehavior.Death);
 	}

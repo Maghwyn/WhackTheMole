@@ -7,18 +7,23 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 {
 	[Header("General Settings")]
 	[SerializeField] private bool _useDOTween = true;
-	[SerializeField] private float _movementDuration = 2f;
+	[SerializeField] private float _movementDuration = 1f;
 	[SerializeField] private Ease _movementEase = Ease.InOutSine;
-
-	[Header("Targets")]
-	[SerializeField] private Transform _upperTarget;
-	[SerializeField] private Transform _lowerTarget;
-	[SerializeField] private float _speed = 5f;
+	[SerializeField] private float _speed = 50f;
 
 	private Rigidbody _rb;
 
+	private Vector3 _upperTargetPos;
+	private Vector3 _lowerTargetPos;
+
 	public enum MovementDirection { Up, Down }
 	public event Action OnPositionReached;
+
+	public void InitializeMaxMinPosition(Vector3 max, Vector3 min)
+	{
+		_upperTargetPos = max;
+		_lowerTargetPos = min;
+	}
 
 	private void Awake()
 	{
@@ -39,9 +44,9 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 
 	private void PerformMovementDOTween(MovementDirection direction)
 	{
-		Transform target = direction == MovementDirection.Up ? _upperTarget : _lowerTarget;
+		Vector3 targetPosition = direction == MovementDirection.Up ? _upperTargetPos : _lowerTargetPos;
 
-		transform.DOMove(target.position, _movementDuration)
+		transform.DOMove(targetPosition, _movementDuration)
 			.SetEase(_movementEase)
 			.OnComplete(() =>
 			{
@@ -51,19 +56,19 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 
 	private void PerformMovementVelocity(MovementDirection direction)
 	{
-		Transform target = direction == MovementDirection.Up ? _upperTarget : _lowerTarget;
-		Vector3 targetPosition = target.position;
+		Vector3 targetPosition = direction == MovementDirection.Up ? _upperTargetPos : _lowerTargetPos;
 
 		Vector3 directionVector = (targetPosition - transform.position).normalized;
 		float distance = Vector3.Distance(transform.position, targetPosition);
 
 		float _speedFactor = Mathf.SmoothStep(0, _speed, distance / 10f);
-		_rb.velocity = directionVector * _speedFactor;
+		Vector3 velocity = directionVector * _speedFactor;
+		_rb.MovePosition(_rb.position + velocity);
 
 		// Snap if close to target
 		if (distance < 0.1f)
 		{
-			_rb.velocity = Vector3.zero;
+			_rb.MovePosition(_rb.position + Vector3.zero);
 			OnPositionReached?.Invoke();
 		}
 	}
