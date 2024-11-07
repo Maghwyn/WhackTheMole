@@ -25,7 +25,6 @@ public class EnemyEscaped : EnemyEscapedSOBase
 	{
 		base.DoFrameUpdateLogic();
 
-		// Nothing happens, the enemy just escaped and self-destroy
 		Destroy(enemy);
 	}
 

@@ -22,21 +22,12 @@ public class EnemyDeath : EnemyDeathSOBase
 	{
 		base.DoFrameUpdateLogic();
 
-		DoStateChange();
+		Destroy(enemy);
 	}
 
 	public override void DoPhysicsLogic()
 	{
 		base.DoPhysicsLogic();
-
-		// Perform movement
-	}
-
-	public override void DoStateChange()
-	{
-		base.DoStateChange();
-
-		// If Z transform hasn't reached the point (don't do anything)
 	}
 
 	public override void DoAnimationStartLogic()

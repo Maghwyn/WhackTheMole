@@ -8,11 +8,14 @@ public class EnemyDownSOBase : ScriptableObject, IEnemyBehavior
 	protected Transform transform;
 	protected GameObject gameObject;
 
+	protected bool isPositionReached;
+
 	public virtual void Initialize(GameObject gameObject, Enemy enemy)
 	{
 		this.enemy = enemy;
 		this.gameObject = gameObject;
 		transform = gameObject.transform;
+		isPositionReached = false;
 	}
 
 	public virtual void DoEnterLogic() {}
@@ -23,5 +26,8 @@ public class EnemyDownSOBase : ScriptableObject, IEnemyBehavior
 	public virtual void DoAnimationStartLogic() {}
 	public virtual void DoAnimationSoundTriggerEventLogic() {}
 	public virtual void DoAnimationEndTriggerEventLogic() {}
-	public virtual void ResetValues() {}
+	public virtual void ResetValues()
+	{
+		isPositionReached = false;
+	}
 }

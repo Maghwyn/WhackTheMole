@@ -14,11 +14,13 @@ public class EnemyDown : EnemyDownSOBase
 	public override void DoEnterLogic()
 	{
 		base.DoEnterLogic();
+		enemy.movement.OnPositionReached += OnPositionReached;
 	}
 
 	public override void DoExitLogic()
 	{
 		base.DoExitLogic();
+		enemy.movement.OnPositionReached -= OnPositionReached;
 	}
 
 	public override void DoFrameUpdateLogic()
@@ -32,14 +34,24 @@ public class EnemyDown : EnemyDownSOBase
 	{
 		base.DoPhysicsLogic();
 
-		// Perform movement
+		enemy.movement.PerformMovement(EnemyMovementMechanic.MovementDirection.Down);
 	}
 
 	public override void DoStateChange()
 	{
 		base.DoStateChange();
 
-		// If Z transform hasn't reached the point (don't do anything)
+
+		if (!isPositionReached) return;
+
+		if (enemy.CompareTag("Mole"))
+		{
+			enemy.stateMachine.ChangeState(enemy.GetState(IEnemy.MachineState.Escaped), IEnemy.MachineBehavior.EscapedDoDamage);
+		}
+		else if (enemy.CompareTag("SafeMole"))
+		{
+			enemy.stateMachine.ChangeState(enemy.GetState(IEnemy.MachineState.Escaped), IEnemy.MachineBehavior.Escaped);
+		}
 	}
 
 	public override void DoAnimationStartLogic()
@@ -60,5 +72,10 @@ public class EnemyDown : EnemyDownSOBase
 	public override void ResetValues()
 	{
 		base.ResetValues();
+	}
+
+	private void OnPositionReached()
+	{
+		isPositionReached = true;
 	}
 }

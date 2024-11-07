@@ -13,11 +13,13 @@ public class EnemyUp : EnemyUpSOBase
 	public override void DoEnterLogic()
 	{
 		base.DoEnterLogic();
+		enemy.movement.OnPositionReached += OnPositionReached;
 	}
 
 	public override void DoExitLogic()
 	{
 		base.DoExitLogic();
+		enemy.movement.OnPositionReached -= OnPositionReached;
 	}
 
 	public override void DoFrameUpdateLogic()
@@ -31,14 +33,15 @@ public class EnemyUp : EnemyUpSOBase
 	{
 		base.DoPhysicsLogic();
 
-		// Perform movement
+		enemy.movement.PerformMovement(EnemyMovementMechanic.MovementDirection.Up);
 	}
 
 	public override void DoStateChange()
 	{
 		base.DoStateChange();
 
-		// If Z transform hasn't reached the point (don't do anything)
+		if (!isPositionReached) return;
+		enemy.stateMachine.ChangeState(enemy.GetState(IEnemy.MachineState.Idle), IEnemy.MachineBehavior.IdleVisible);
 	}
 
 	public override void DoAnimationStartLogic()
@@ -59,5 +62,10 @@ public class EnemyUp : EnemyUpSOBase
 	public override void ResetValues()
 	{
 		base.ResetValues();
+	}
+
+	private void OnPositionReached()
+	{
+		isPositionReached = true;
 	}
 }

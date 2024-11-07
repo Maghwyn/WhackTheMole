@@ -25,7 +25,7 @@ public class EnemyEscapedDoDamage : EnemyEscapedSOBase
 	{
 		base.DoFrameUpdateLogic();
 
-		// TODO: Change the score value with base score * time scaler
+		// TODO: Change the score value
 		Destroy(enemy);
 	}
 
