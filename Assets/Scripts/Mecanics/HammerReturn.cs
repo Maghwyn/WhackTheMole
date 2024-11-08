@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -7,44 +5,58 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class HammerReturn : MonoBehaviour
 {
-    public XRSocketInteractor socket;
-    public XRGrabInteractable hammer;
+	[SerializeField] private XRGrabInteractable _hammer;
+	[SerializeField] private float _hammerDistanceCheckingInterval = 0.5f;
 
-    private Transform hammerTransform;
+	private XRSocketInteractor _socket;
+	private Coroutine _returnToSocketCoroutine;
 
-    private bool isCoroutineActive = false;
+	public bool isSnapped => _socket.isPerformingManualInteraction;
 
+	private void Awake()
+	{
+		_socket = GetComponent<XRSocketInteractor>();
+	}
 
-    private void Start(){
-        hammerTransform = hammer.transform;
-    }
+	public void OnSocketSnapEnter()
+	{
+		StopReturnToSocket();
+	}
 
-    private void Update()
-    {
-        if (socket.isPerformingManualInteraction)
-        {
-            if (!isCoroutineActive) return;
-            isCoroutineActive = false;
-            StopCoroutine(ReturnToSocket());
-        }
-        else
-        {
-            isCoroutineActive = true;
-            StartCoroutine(ReturnToSocket());
-        }
-    }
+	public void OnSocketSnapExit()
+	{
+		StartReturnToSocket();
+	}
 
-    private IEnumerator ReturnToSocket()
-    {
-        while(true)
-        {
-            float Distance = Vector3.Distance(socket.transform.position,hammerTransform.position);
-            if(Distance > 20f)
-                {
-                    socket.StartManualInteraction(hammer as IXRSelectInteractable);
-                }
-            yield return new WaitForSeconds(0.5f);
-        }
+	public void StartReturnToSocket()
+	{
+		_returnToSocketCoroutine ??= StartCoroutine(ReturnToSocket());
+	}
 
-    }
+	public void StopReturnToSocket()
+	{
+		if (_returnToSocketCoroutine != null)
+		{
+			StopCoroutine(_returnToSocketCoroutine);
+			_returnToSocketCoroutine = null;
+		}
+	}
+
+	private IEnumerator ReturnToSocket()
+	{
+		while (true)
+		{
+			float distance = Vector3.Distance(_socket.transform.position, _hammer.transform.position);
+			if (distance > 20f)
+			{
+				_socket.StartManualInteraction(_hammer as IXRSelectInteractable);
+			}
+			yield return new WaitForSeconds(_hammerDistanceCheckingInterval);
+		}
+	}
+
+	public void ForceReturnToSocket()
+	{
+		_socket.StartManualInteraction(_hammer as IXRSelectInteractable);
+	}
 }
