@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using Random = UnityEngine.Random;
-using Unity.VisualScripting;
-using System.Linq;
 
 public class SpawnerManager : MonoBehaviour
 {
@@ -20,12 +18,12 @@ public class SpawnerManager : MonoBehaviour
 	[SerializeField] private GameObject _safeMolePrefab;
 
 	[Header("SO Float References")]
-	[SerializeField] private FloatVariable _gameHP;
 	[SerializeField] private FloatVariable _rate;
 
 	private Quaternion _moleRotation = Quaternion.Euler(-90, 0, 180);
 	private float _currentSpawnInterval;
 	private readonly Dictionary<int, Enemy> _enemies = new();
+	private Coroutine _spawnEnemiesCoroutine;
 
 	[Serializable]
 	public class MoleHole
@@ -36,24 +34,39 @@ public class SpawnerManager : MonoBehaviour
 		public Transform lowerTransform;
 	}
 
-	private void Start()
+	private void Awake()
 	{
 		_currentSpawnInterval = _maxSpawnInterval;
-		StartCoroutine(SpawnEnemiesAtInterval());
 	}
 
 	private void Update()
 	{
-		if (_gameHP.value <= 0)
+		_currentSpawnInterval = Mathf.Max(_minSpawnInterval, _currentSpawnInterval - (_rate.value * Time.deltaTime));
+	}
+
+	private void OnEnable()
+	{
+		_spawnEnemiesCoroutine ??= StartCoroutine(SpawnEnemiesAtInterval());
+	}
+
+	private void OnDisable()
+	{
+		if (_spawnEnemiesCoroutine != null)
 		{
-			StopCoroutine(SpawnEnemiesAtInterval());
-			KillAllEnemies();
-			gameObject.SetActive(false);
+			StopCoroutine(_spawnEnemiesCoroutine);
+			_spawnEnemiesCoroutine = null;
 		}
-		else
+	}
+
+	public void EndTask()
+	{
+		if (_spawnEnemiesCoroutine != null)
 		{
-			_currentSpawnInterval = Mathf.Max(_minSpawnInterval, _currentSpawnInterval - (_rate.value * Time.deltaTime));
+			StopCoroutine(_spawnEnemiesCoroutine);
+			_spawnEnemiesCoroutine = null;
 		}
+
+		KillAllEnemies();
 	}
 
 	IEnumerator SpawnEnemiesAtInterval()
