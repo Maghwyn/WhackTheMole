@@ -6,9 +6,12 @@ public class MiniGameManager : MonoBehaviour
 	[SerializeField] private MiniGameUIManager _miniGameUIManager;
 	[SerializeField] private SpawnerManager _spawnerManager;
 
-	[Header("Hammer Mechanics")]
-	[SerializeField] private HammerEvent _hammerEvent;
+	[Header("Mechanic")]
 	[SerializeField] private HammerReturn _hammerReturn;
+
+	[Header("Events")]
+	[SerializeField] private HammerEvent _hammerEvent;
+	[SerializeField] private TeleportEvent _teleportEvent;
 
 	[Header("SO Float References")]
 	[SerializeField] private FloatVariable _gameHP;
@@ -20,15 +23,18 @@ public class MiniGameManager : MonoBehaviour
 		_miniGameUIManager = gameObject.GetComponentInChildren<MiniGameUIManager>();
 		_miniGameUIManager.HideAllUI();
 		_spawnerManager.enabled = false;
+
+		_teleportEvent.OnAnchorEnter += PreInitGame;
+		_teleportEvent.OnAnchorExit += PostEndGame;
 	}
 
-	private void OnEnable()
+	private void PreInitGame()
 	{
 		_hammerEvent.OnHammerGrab += InitMiniGame;
 		_miniGameUIManager.ShowStartingMessage();
 	}
 
-	private void OnDisable()
+	private void PostEndGame()
 	{
 		// Make sure everything is reset even if it's unnecessary as it's "safe" anyway.
 
