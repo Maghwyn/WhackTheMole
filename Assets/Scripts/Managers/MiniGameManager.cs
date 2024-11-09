@@ -13,8 +13,10 @@ public class MiniGameManager : MonoBehaviour
 	[SerializeField] private HammerEvent _hammerEvent;
 	[SerializeField] private TeleportEvent _teleportEvent;
 
-	[Header("SO Float References")]
+	[Header("Game Data")]
 	[SerializeField] private FloatVariable _gameHP;
+	[SerializeField] private FloatVariable _gameScore;
+	[SerializeField] private FloatVariable _gameMultiplier;
 
 	private bool _isGamePaused = false;
 
@@ -54,6 +56,7 @@ public class MiniGameManager : MonoBehaviour
 		_hammerReturn.ForceReturnToSocket();
 
 		_isGamePaused = false;
+		ResetMiniGameData();
 	}
 
 	private void Update()
@@ -73,6 +76,8 @@ public class MiniGameManager : MonoBehaviour
 
 	public void OnRestartMiniGame()
 	{
+		ResetMiniGameData();
+
 		if (_hammerEvent.isGrabbed)
 		{
 			InitMiniGame();
@@ -128,5 +133,12 @@ public class MiniGameManager : MonoBehaviour
 
 		_miniGameUIManager.ForceStopNewGameCountdownIfRunning();
 		_miniGameUIManager.ShowPauseMessage();
+	}
+
+	private void ResetMiniGameData()
+	{
+		_gameHP.value = 5;
+		_gameMultiplier.value = 1;
+		_gameScore.value = 0;
 	}
 }

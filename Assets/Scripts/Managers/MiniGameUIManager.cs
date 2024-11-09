@@ -2,16 +2,23 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniGameUIManager : MonoBehaviour
 {
+	[Header("Event UI")]
 	[SerializeField] private GameObject _startingMessageUI;
+	[SerializeField] private GameObject _restartUI;
+
+	[Header("Countdown UI")]
 	[SerializeField] private GameObject _gameMessageUI;
+	[SerializeField] private Image _gameMessageBackground;
+	[SerializeField] private TextMeshProUGUI _gameMessageText;
+
+	[Header("Stats UI")]
 	[SerializeField] private GameObject _lifeUI;
 	[SerializeField] private GameObject _scoreUI;
 	[SerializeField] private GameObject _multiplierUI;
-	[SerializeField] private GameObject _restartUI;
-	[SerializeField] private TextMeshProUGUI _floatingText;
 
 	public event Action OnStartNewGameComplete;
 	public event Action OnResumeGameComplete;
@@ -47,8 +54,8 @@ public class MiniGameUIManager : MonoBehaviour
 	public void ShowPauseMessage()
 	{
 		ToggleGameMessage(true);
-		_floatingText.text = "Paused";
-		// TODO: Set background to RED
+		_gameMessageText.text = "Paused";
+		_gameMessageBackground.color = Color.red;
 	}
 
 	public void ShowRestartUI()
@@ -90,15 +97,15 @@ public class MiniGameUIManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.5f);
 
-		// TODO: Set background to GREEN
+		_gameMessageBackground.color = Color.green;
 
 		for (int i = 3; i > 0; i--)
 		{
-			_floatingText.text = $"Starting in... {i}";
+			_gameMessageText.text = $"Starting in... {i}";
 			yield return new WaitForSeconds(1f);
 		}
 
-		_floatingText.text = "GO!";
+		_gameMessageText.text = "GO!";
 		yield return new WaitForSeconds(1f);
 
 		ToggleGameMessage(false);
@@ -112,15 +119,16 @@ public class MiniGameUIManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.5f);
 
-		// TODO: Set background to ORANGE
+		// Orange
+		_gameMessageBackground.color = new Color(255/255, 128/255, 0);
 
 		for (int i = 3; i > 0; i--)
 		{
-			_floatingText.text = $"Resuming in... {i}";
+			_gameMessageText.text = $"Resuming in... {i}";
 			yield return new WaitForSeconds(1f);
 		}
 
-		_floatingText.text = "GO!";
+		_gameMessageText.text = "GO!";
 		yield return new WaitForSeconds(1f);
 
 		ToggleGameMessage(false);
