@@ -306,6 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80106fead1bb849c1864cbeb82f39443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorePoint: 100
+  type: 0
   _enemyIdleHiddenBase: {fileID: 11400000, guid: 4abf3876f1e454942b365a5e4adb4d95,
     type: 2}
   _enemyIdleVisibleBase: {fileID: 11400000, guid: 51912224404f3824883c26af352ffd96,
@@ -396,8 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621cebc64edc34f37819fa0c1accc78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameScore: {fileID: 11400000, guid: be2da0818dffb41b88a59f9e4abd2f60, type: 2}
-  _gameMultiplier: {fileID: 11400000, guid: b6df4940f3d1b4c39af8d7cfca81bb19, type: 2}
+  _miniGameDataManager: {fileID: 0}
 --- !u!1 &3960141622624512249
 GameObject:
   m_ObjectHideFlags: 0
