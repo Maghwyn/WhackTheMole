@@ -14,11 +14,7 @@ public class MiniGameManager : MonoBehaviour
 	[SerializeField] private HammerEvent _hammerEvent;
 	[SerializeField] private TeleportEvent _teleportEvent;
 
-	[Header("Game Data")]
-	[SerializeField] private FloatVariable _gameHP;
-	[SerializeField] private FloatVariable _gameScore;
-	[SerializeField] private FloatVariable _gameMultiplier;
-
+	private MiniGameDataManager _miniGameDataManager;
 	private bool _isGamePaused = false;
 
 	private void Awake()
@@ -29,6 +25,11 @@ public class MiniGameManager : MonoBehaviour
 
 		_teleportEvent.OnAnchorEnter += PreInitGame;
 		_teleportEvent.OnAnchorExit += PostEndGame;
+	}
+
+	private void Start()
+	{
+		_miniGameDataManager = FindObjectOfType<MiniGameDataManager>();
 	}
 
 	private void PreInitGame()
@@ -57,12 +58,12 @@ public class MiniGameManager : MonoBehaviour
 		_hammerReturn.ForceReturnToSocket();
 
 		_isGamePaused = false;
-		ResetMiniGameData();
+		_miniGameDataManager.ResetMiniGameData();
 	}
 
 	private void Update()
 	{
-		if (_gameHP.value <= 0)
+		if (_miniGameDataManager.isOutOfHealth)
 		{
 			_hammerEvent.OnHammerGrab -= ResumeMiniGame;
 			_hammerEvent.OnHammerDrop -= PauseMiniGame;
@@ -71,22 +72,7 @@ public class MiniGameManager : MonoBehaviour
 			_spawnerManager.enabled = false;
 
 			_miniGameUIManager.ShowRestartUI();
-			_highScoreManager.AddNewScore(_gameScore.value);
-		}
-	}
-
-	public void OnRestartMiniGame()
-	{
-		ResetMiniGameData();
-
-		if (_hammerEvent.isGrabbed)
-		{
-			InitMiniGame();
-		}
-		else
-		{
-			_hammerEvent.OnHammerGrab += InitMiniGame;
-			_miniGameUIManager.ShowStartingMessage();
+			_highScoreManager.AddNewScore(_miniGameDataManager.score);
 		}
 	}
 
@@ -136,10 +122,19 @@ public class MiniGameManager : MonoBehaviour
 		_miniGameUIManager.ShowPauseMessage();
 	}
 
-	private void ResetMiniGameData()
+	public void OnRestartMiniGame()
 	{
-		_gameHP.value = 5;
-		_gameMultiplier.value = 1;
-		_gameScore.value = 0;
+		_miniGameDataManager.ResetMiniGameData();
+
+		if (_hammerEvent.isGrabbed)
+		{
+			InitMiniGame();
+		}
+		else
+		{
+			_hammerEvent.OnHammerGrab += InitMiniGame;
+			_miniGameUIManager.ShowStartingMessage();
+		}
 	}
+
 }
