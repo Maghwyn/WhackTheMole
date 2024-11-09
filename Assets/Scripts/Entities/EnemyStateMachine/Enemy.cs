@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class Enemy: MonoBehaviour, IEnemy
 {
+	[Header("Enemy game data")]
+	[SerializeField] public int scorePoint;
+	[SerializeField] public MoleType type;
+
 	#region STATE MACHINE
 	public EnemyStateMachine stateMachine { get; protected set; }
 	#endregion
