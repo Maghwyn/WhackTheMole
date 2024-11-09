@@ -208,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 19549739}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16007157, y: 0.046226382, z: 1.7435566}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -239,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 51468667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.052145876, y: 0.5513611, z: 0.5225968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -496,7 +496,7 @@ Transform:
   m_GameObject: {fileID: 262429924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.052145876, y: 0.5513611, z: 0.5225968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1308,7 +1308,7 @@ Transform:
   m_GameObject: {fileID: 453585534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.052145876, y: 0.5513611, z: 0.5225968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4207,7 +4207,7 @@ Transform:
   m_GameObject: {fileID: 1909265742}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7510653, y: -0.87173027, z: 5.758929}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4421,10 +4421,16 @@ MonoBehaviour:
   _maxSpawnInterval: 2
   _minSpawnInterval: 0.5
   _maxSpawnEnemies: 5
-  _safeMoleSpawnRate: 0.2
-  _molePrefab: {fileID: 3468923353853503215, guid: bb9e7307e134a7c468a83ca9f05abcf4,
+  _noHitMoleSpawnRate: 0.3
+  _goldenMoleSpawnRate: 0.15
+  _healthMoleSpawnRate: 0.05
+  _regularMolePrefab: {fileID: 3468923353853503215, guid: bb9e7307e134a7c468a83ca9f05abcf4,
     type: 3}
-  _safeMolePrefab: {fileID: 2365200803730001687, guid: d5fe0fa67e7de5141a06cfe092b268d5,
+  _noHitMolePrefab: {fileID: 2365200803730001687, guid: d5fe0fa67e7de5141a06cfe092b268d5,
+    type: 3}
+  _goldenMolePrefab: {fileID: 4870679272826176154, guid: 2af5ef5f5f8334dbeb5a0a005b979f35,
+    type: 3}
+  _healthMolePrefab: {fileID: 8402933151275590269, guid: e4405e3a05b42497e8729489891b46dc,
     type: 3}
   _rate: {fileID: 11400000, guid: 9555868bc67ca9c4f9aaf48b8a7d6ba3, type: 2}
 --- !u!4 &1990575210 stripped
@@ -10087,7 +10093,7 @@ PrefabInstance:
     - target: {fileID: 1031326139449506243, guid: 9a634cd4f5b094d27928da160c490f99,
         type: 3}
       propertyPath: m_Name
-      value: HolyMoleTreeStumpVariant
+      value: HolyMoleTreeStump
       objectReference: {fileID: 0}
     - target: {fileID: 1573038749468328087, guid: 9a634cd4f5b094d27928da160c490f99,
         type: 3}
