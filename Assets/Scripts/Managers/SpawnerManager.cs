@@ -106,7 +106,7 @@ public class SpawnerManager : MonoBehaviour
 	{
 		foreach (var enemy in _enemies.Values)
 		{
-			enemy.Kill();
+			enemy.InstantKill();
 		}
 		_enemies.Clear();
 	}

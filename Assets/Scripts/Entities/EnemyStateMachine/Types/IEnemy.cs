@@ -20,6 +20,7 @@ public interface IEnemy
 		Down,
 		EscapedDoDamage,
 		Escaped,
-		Death,
+		InstantDeath,
+		DelayedDeath,
 	}
 }

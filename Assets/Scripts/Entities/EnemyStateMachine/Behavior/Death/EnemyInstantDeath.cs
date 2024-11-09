@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemy Logic/Death Logic/Death", fileName = "Death-Death")]
-public class EnemyDeath : EnemyDeathSOBase
+[CreateAssetMenu(menuName = "Enemy Logic/Death Logic/Instant Death", fileName = "Death-Instant-Death")]
+public class EnemyInstantDeath : EnemyDeathSOBase
 {
 	public override void Initialize(GameObject gameObject, Enemy enemy)
 	{

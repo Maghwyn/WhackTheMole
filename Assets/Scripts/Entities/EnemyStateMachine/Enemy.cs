@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy: MonoBehaviour, IEnemy
@@ -48,7 +46,8 @@ public class Enemy: MonoBehaviour, IEnemy
 	#region STATE MACHINE SET STATE
 	public virtual EnemyState GetState(IEnemy.MachineState state) { return null; }
 	public virtual IEnemyBehavior GetStateBehavior(IEnemy.MachineBehavior behavior) { return null; }
-	public virtual void Kill() {}
+	public virtual void InstantKill() {}
+	public virtual void DelayedKill() {}
 	#endregion
 
 	public void InvokeOnSelfDestroy()
