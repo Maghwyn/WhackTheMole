@@ -147,7 +147,10 @@ MonoBehaviour:
   _enemyUpBase: {fileID: 11400000, guid: b62a645f25f3f2347b77fb863d6a8935, type: 2}
   _enemyDownBase: {fileID: 11400000, guid: 48a64b4f54d6d984c832d88abfc70814, type: 2}
   _enemyEscapedBase: {fileID: 11400000, guid: 9aad78a8742984941b22324d7ff54f7d, type: 2}
-  _enemyDeathBase: {fileID: 11400000, guid: 0263d88bc711e9942be662d40bfb7bec, type: 2}
+  _enemyInstantDeathBase: {fileID: 11400000, guid: cd0cddf970d4244449782de0e1756568,
+    type: 2}
+  _enemyDelayedDeathBase: {fileID: 11400000, guid: 4b55775d1e00f4b0f80a5e8f7408764f,
+    type: 2}
 --- !u!54 &957365208308496017
 Rigidbody:
   m_ObjectHideFlags: 0
