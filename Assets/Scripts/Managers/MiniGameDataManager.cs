@@ -59,8 +59,11 @@ public class MiniGameDataManager : MonoBehaviour
 			case MoleType.Golden:
 				HandleGoldenMole(baseScore);
 				break;
-			case MoleType.Safe:
-				HandleSafeMole();
+			case MoleType.Health:
+				HandleHealthMole(baseScore);
+				break;
+			case MoleType.NoHit:
+				HandleNotHitMole();
 				break;
 		}
 	}
@@ -74,12 +77,22 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void HandleGoldenMole(int baseScore)
 	{
-		_currentCombo += 4;
+		_currentCombo += 5;
 		UpdateMultiplierTier();
 		AddScore(baseScore * 2);
 	}
 
-	private void HandleSafeMole()
+	private void HandleHealthMole(int baseScore)
+	{
+		if (_gameHP.value < 5)
+			_gameHP.ApplyChange(1);
+
+		_currentCombo += 1;
+		UpdateMultiplierTier();
+		AddScore(baseScore);
+	}
+
+	private void HandleNotHitMole()
 	{
 		float currentMultiplier = _gameMultiplier.value;
 		float reduction = _multiplierTiers[_currentTier].penaltyReduction;
