@@ -84,7 +84,7 @@ public class Mole: Enemy
 				return _deathState;
 
 			default:
-				Debug.LogWarning($"State {state.HumanName()} not found for {this.name}");
+				Debug.LogWarning($"State {state} not found for {this.name}");
 				return null;
 		}
 	}
@@ -109,7 +109,7 @@ public class Mole: Enemy
 				return EnemyDelayedDeathBaseInstance;
 
 			default:
-				Debug.LogWarning($"Behavior {behavior.HumanName()} not found for {this.name}");
+				Debug.LogWarning($"Behavior {behavior} not found for {this.name}");
 				return null;
 		}
 	}
