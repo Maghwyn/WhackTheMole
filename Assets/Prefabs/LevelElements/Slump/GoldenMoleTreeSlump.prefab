@@ -155,27 +155,27 @@ PrefabInstance:
     - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
-        type: 3}
-      propertyPath: m_LocalRotation.x
       value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
         type: 3}
-      propertyPath: m_LocalRotation.y
+      propertyPath: m_LocalRotation.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
         type: 3}
@@ -190,8 +190,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5593871582195450109, guid: 141e0dc42227b4c9e9f04cffc3597546,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5097601056252175616}
   m_SourcePrefab: {fileID: 100100000, guid: 141e0dc42227b4c9e9f04cffc3597546, type: 3}
+--- !u!1 &206353426323896349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5593871582195450109, guid: 141e0dc42227b4c9e9f04cffc3597546,
+    type: 3}
+  m_PrefabInstance: {fileID: 5727577938200754400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5097601056252175616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206353426323896349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4dbf50ffcf524f39869af0e485702fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleAmplitude: 10
+  rotationAmplitude: 5
+  frequency: 1
 --- !u!4 &2303152835221471495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5803451640566430183, guid: 141e0dc42227b4c9e9f04cffc3597546,
