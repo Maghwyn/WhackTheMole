@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SageMole: Enemy
+public class SafeMole: Enemy
 {
 	#region SM Variables
 	private EnemyIdleState _idleState;
