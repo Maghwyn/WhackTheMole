@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e0e9186a5814ce4a1d26a9e0f53555, type: 3}
-  m_Name: Death-Death
+  m_Script: {fileID: 11500000, guid: fa635f1b4731d410099389de4cabd025, type: 3}
+  m_Name: Death-Instant-Death
   m_EditorClassIdentifier: 
