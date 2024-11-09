@@ -3,11 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class HitEnemy : MonoBehaviour
 {
-	private Enemy enemy;
+	[SerializeField] private MiniGameDataManager _miniGameDataManager;
+
+	private Enemy _enemy;
 
 	public void Start()
 	{
-		enemy = gameObject.GetComponentInParent<Enemy>();
+		_enemy = gameObject.GetComponentInParent<Enemy>();
+		_miniGameDataManager = FindObjectOfType<MiniGameDataManager>();
 	}
 
 	private void OnTriggerEnter(Collider collider)
@@ -16,16 +19,10 @@ public class HitEnemy : MonoBehaviour
 		if (!GO.CompareTag("Hammer")) return;
 
 
-		if (enemy.CompareTag("Mole"))
-		{
-
-		}
-		else if (enemy.CompareTag("SafeMole"))
-		{
-
-		}
+		MoleType moleType = _enemy.type;
+		_miniGameDataManager.HandleMoleHit(moleType, _enemy.scorePoint);
 
 		// TODO: Instantiate a VFX prefab to create a hit effect
-		enemy.DelayedKill();
+		_enemy.DelayedKill();
 	}
 }

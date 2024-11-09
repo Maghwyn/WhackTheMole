@@ -8,7 +8,7 @@ public class ScoreBar : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI _scoreText;
 
 	[Header("Score Data")]
-	[SerializeField] private FloatVariable _gameScore;
+	[SerializeField] private IntVariable _gameScore;
 
 	[Header("Score Animation")]
 	[SerializeField] private float _scoreIncrementDuration = 1f;
