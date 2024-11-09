@@ -32,6 +32,7 @@ public class MiniGameUIManager : MonoBehaviour
 		ToggleMiniGameLife(false);
 		ToggleMiniGameScore(false);
 		ToggleMiniGameMultiplier(false);
+		ToggleRestartUI(false);
 	}
 
 	public void ShowGameUI()

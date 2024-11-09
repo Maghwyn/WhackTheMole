@@ -7,7 +7,7 @@ using TMPro;
 [System.Serializable]
 public class HighScoreList
 {
-	public List<float> scores = new();
+	public List<int> scores = new();
 }
 
 public class HighScoreManager : MonoBehaviour
@@ -44,7 +44,7 @@ public class HighScoreManager : MonoBehaviour
 		PlayerPrefs.Save();
 	}
 
-	public void AddNewScore(float score)
+	public void AddNewScore(int score)
 	{
 		// Should allow duplicated score cuz why not
 		_scoreList.scores.Add(score);
@@ -89,7 +89,7 @@ public class HighScoreManager : MonoBehaviour
 			GameObject scoreEntry = Instantiate(_scorePrefab, targetParent);
 			
 			TextMeshProUGUI scoreText = scoreEntry.GetComponentInChildren<TextMeshProUGUI>();
-			scoreText.text = $"#{i + 1}: {_scoreList.scores[i]:F2}";
+			scoreText.text = $"#{i + 1}: {_scoreList.scores[i]}";
 
 			Image background = scoreEntry.GetComponentInChildren<Image>();
 			if (background != null)
@@ -107,7 +107,7 @@ public class HighScoreManager : MonoBehaviour
 		HashSet<float> uniqueScores = new();
 		while (uniqueScores.Count < _MaxScores)
 		{
-			float randomScore = Mathf.Round(Random.Range(100f, 1000f));
+			int randomScore = (int)Mathf.Round(Random.Range(100f, 1000f));
 			if (uniqueScores.Add(randomScore))
 			{
 				AddNewScore(randomScore);
@@ -117,7 +117,7 @@ public class HighScoreManager : MonoBehaviour
 
 	public void AddRandomScore()
 	{
-		float randomScore = Mathf.Round(Random.Range(100f, 1000f));
+		int randomScore = (int)Mathf.Round(Random.Range(100f, 1000f));
 		AddNewScore(randomScore);
 	}
 
