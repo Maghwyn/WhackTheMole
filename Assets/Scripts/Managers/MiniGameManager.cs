@@ -5,6 +5,7 @@ public class MiniGameManager : MonoBehaviour
 	[Header("Managers")]
 	[SerializeField] private MiniGameUIManager _miniGameUIManager;
 	[SerializeField] private SpawnerManager _spawnerManager;
+	[SerializeField] private HighScoreManager _highScoreManager;
 
 	[Header("Mechanic")]
 	[SerializeField] private HammerReturn _hammerReturn;
@@ -70,7 +71,7 @@ public class MiniGameManager : MonoBehaviour
 			_spawnerManager.enabled = false;
 
 			_miniGameUIManager.ShowRestartUI();
-			// TODO: Save to Leaderboard
+			_highScoreManager.AddNewScore(_gameScore.value);
 		}
 	}
 
