@@ -1,8 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using System;
 using Random = UnityEngine.Random;
+
+[System.Serializable]
+public class MoleHole
+{
+	public int index;
+	public Transform spawnTransform;
+	public Transform upperTransform;
+	public Transform lowerTransform;
+}
 
 public class SpawnerManager : MonoBehaviour
 {
@@ -11,11 +19,17 @@ public class SpawnerManager : MonoBehaviour
 	[SerializeField] private float _maxSpawnInterval = 2f;
 	[SerializeField] private float _minSpawnInterval = 0.5f;
 	[SerializeField] private int _maxSpawnEnemies = 5;
-	[SerializeField] private float _safeMoleSpawnRate = 0.2f;
+
+	[Header("Spawn Rates")]
+	[SerializeField] private float _noHitMoleSpawnRate = 0.3f;
+	[SerializeField] private float _goldenMoleSpawnRate = 0.15f;
+	[SerializeField] private float _healthMoleSpawnRate = 0.05f;
 
 	[Header("Enemies Prefab")]
-	[SerializeField] private GameObject _molePrefab;
-	[SerializeField] private GameObject _safeMolePrefab;
+	[SerializeField] private GameObject _regularMolePrefab;
+	[SerializeField] private GameObject _noHitMolePrefab;
+	[SerializeField] private GameObject _goldenMolePrefab;
+	[SerializeField] private GameObject _healthMolePrefab;
 
 	[Header("SO Float References")]
 	[SerializeField] private FloatVariable _rate;
@@ -24,15 +38,6 @@ public class SpawnerManager : MonoBehaviour
 	private float _currentSpawnInterval;
 	private readonly Dictionary<int, Enemy> _enemies = new();
 	private Coroutine _spawnEnemiesCoroutine;
-
-	[Serializable]
-	public class MoleHole
-	{
-		public int index;
-		public Transform spawnTransform;
-		public Transform upperTransform;
-		public Transform lowerTransform;
-	}
 
 	private void Awake()
 	{
@@ -51,11 +56,7 @@ public class SpawnerManager : MonoBehaviour
 
 	private void OnDisable()
 	{
-		if (_spawnEnemiesCoroutine != null)
-		{
-			StopCoroutine(_spawnEnemiesCoroutine);
-			_spawnEnemiesCoroutine = null;
-		}
+		EndTask();
 	}
 
 	public void EndTask()
@@ -81,7 +82,7 @@ public class SpawnerManager : MonoBehaviour
 	private void SpawnEnemy()
 	{
 		MoleHole moleHole = GetRandomFreeMoleHole();
-		GameObject prefab = Random.value < _safeMoleSpawnRate ? _safeMolePrefab : _molePrefab;
+		GameObject prefab = DetermineMolePrefab();
 
 		GameObject enemyGO = Instantiate(prefab, moleHole.spawnTransform.position, _moleRotation);
 		Enemy enemy = enemyGO.GetComponent<Enemy>();
@@ -90,6 +91,24 @@ public class SpawnerManager : MonoBehaviour
 		enemy.OnSelfDestroy += () => OnEnemyDestroy(moleHole.index);
 
 		_enemies[moleHole.index] = enemy;
+	}
+
+	private GameObject DetermineMolePrefab()
+	{
+		float randomValue = Random.value;
+		
+		if (randomValue < _healthMoleSpawnRate)
+			return _healthMolePrefab;
+		
+		randomValue -= _healthMoleSpawnRate;
+		if (randomValue < _goldenMoleSpawnRate)
+			return _goldenMolePrefab;
+			
+		randomValue -= _goldenMoleSpawnRate;
+		if (randomValue < _noHitMoleSpawnRate)
+			return _noHitMolePrefab;
+			
+		return _regularMolePrefab;
 	}
 
 	private MoleHole GetRandomFreeMoleHole()
