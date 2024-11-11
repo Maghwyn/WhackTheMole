@@ -16,7 +16,7 @@ public class MiniGameDataManager : MonoBehaviour
 	[SerializeField] private float _defaultGameMultiplier = 1;
 
 	[Header("Game Data")]
-	[SerializeField] private IntVariable _gameHP;
+	[SerializeField] private FloatVariable _gameHP;
 	[SerializeField] private IntVariable _gameScore;
 	[SerializeField] private FloatVariable _gameMultiplier;
 

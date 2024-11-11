@@ -7,12 +7,14 @@ public class HealthBar : MonoBehaviour
 	[SerializeField] private Image _healthBarFill;
 
 	[Header("Health Data")]
-	[SerializeField] private IntVariable _gameHP;
+	[SerializeField] private FloatVariable _gameHP;
 
 	private void Update()
 	{
 		float value = _gameHP.value / 5;
 		if (_healthBarFill.fillAmount == value) return;
+		Debug.Log(value);
+		Debug.Log(_gameHP.value);
 
 		_healthBarFill.fillAmount = value;
 	}
