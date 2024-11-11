@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Enemy Logic/Escaped Logic/Escaped", fileName = "Escaped-Escaped")]

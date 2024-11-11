@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 23638666042545922}
   - component: {fileID: 65420490715003406}
   m_Layer: 0
-  m_Name: SM_Prop_Chest_Wood_Lid
+  m_Name: BoxLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

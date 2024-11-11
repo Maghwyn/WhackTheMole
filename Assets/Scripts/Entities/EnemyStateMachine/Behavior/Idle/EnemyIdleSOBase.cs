@@ -7,7 +7,7 @@ public class EnemyIdleSOBase : ScriptableObject, IEnemyBehavior
 	protected GameObject gameObject;
 
 	protected float stateTime;
-    protected float stateDuration;
+	protected float stateDuration;
 
 	public virtual void Initialize(GameObject gameObject, Enemy enemy)
 	{

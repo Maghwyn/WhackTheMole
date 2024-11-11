@@ -1,16 +1,22 @@
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy: MonoBehaviour, IEnemy
 {
+	[Header("Enemy game data")]
+	[SerializeField] public int scorePoint;
+	[SerializeField] public MoleType type;
+
 	#region STATE MACHINE
 	public EnemyStateMachine stateMachine { get; protected set; }
 	#endregion
 
 	#region MECHANICS
 	public EnemyMovementMechanic movement { get ; protected set; }
+	#endregion
+
+	#region FLAGS
+	protected bool isFrozen = false;
 	#endregion
 
 	public event Action OnSelfDestroy;
@@ -36,11 +42,13 @@ public class Enemy: MonoBehaviour, IEnemy
 
 	protected virtual void Update()
 	{
+		if (isFrozen) return;
 		stateMachine.currentEnemyState.FrameUpdate();
 	}
 
 	protected virtual void FixedUpdate()
 	{
+		if (isFrozen) return;
 		stateMachine.currentEnemyState.PhysicsUpdate();
 	}
 	#endregion
@@ -48,7 +56,17 @@ public class Enemy: MonoBehaviour, IEnemy
 	#region STATE MACHINE SET STATE
 	public virtual EnemyState GetState(IEnemy.MachineState state) { return null; }
 	public virtual IEnemyBehavior GetStateBehavior(IEnemy.MachineBehavior behavior) { return null; }
-	public virtual void Kill() {}
+	public virtual void InstantKill() {}
+	public virtual void DelayedKill() {}
+	public void Freeze()
+	{
+		isFrozen = true;
+	}
+
+	public void UnFreeze()
+	{
+		isFrozen = false;
+	}
 	#endregion
 
 	public void InvokeOnSelfDestroy()

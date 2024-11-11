@@ -19,14 +19,16 @@ public class Mole: Enemy
 	[SerializeField] private EnemyUpSOBase _enemyUpBase;
 	[SerializeField] private EnemyDownSOBase _enemyDownBase;
 	[SerializeField] private EnemyEscapedSOBase _enemyEscapedDoDamageBase;
-	[SerializeField] private EnemyDeathSOBase _enemyDeathBase;
+	[SerializeField] private EnemyDeathSOBase _enemyInstantDeathBase;
+	[SerializeField] private EnemyDeathSOBase _enemyDelayedDeathBase;
 
 	private EnemyIdleSOBase EnemyIdleHiddenBaseInstance;
 	private EnemyIdleSOBase EnemyIdleVisibleBaseInstance;
 	private EnemyUpSOBase EnemyUpBaseInstance;
 	private EnemyDownSOBase EnemyDownBaseInstance;
 	private EnemyEscapedSOBase EnemyEscapedDoDamageBaseInstance;
-	private EnemyDeathSOBase EnemyDeathBaseInstance;
+	private EnemyDeathSOBase EnemyInstantDeathBaseInstance;
+	private EnemyDeathSOBase EnemyDelayedDeathBaseInstance;
 
 	#endregion
 
@@ -41,13 +43,14 @@ public class Mole: Enemy
 		EnemyUpBaseInstance = Instantiate(_enemyUpBase);
 		EnemyDownBaseInstance = Instantiate(_enemyDownBase);
 		EnemyEscapedDoDamageBaseInstance = Instantiate(_enemyEscapedDoDamageBase);
-		EnemyDeathBaseInstance = Instantiate(_enemyDeathBase);
+		EnemyInstantDeathBaseInstance = Instantiate(_enemyInstantDeathBase);
+		EnemyDelayedDeathBaseInstance = Instantiate(_enemyDelayedDeathBase);
 
 		_idleState = new EnemyIdleState(this, base.stateMachine, IEnemy.MachineBehavior.IdleHidden);
 		_upState = new EnemyUpState(this, base.stateMachine, IEnemy.MachineBehavior.Up);
 		_downState = new EnemyDownState(this, base.stateMachine, IEnemy.MachineBehavior.Down);
 		_escapedState = new EnemyEscapedState(this, base.stateMachine, IEnemy.MachineBehavior.EscapedDoDamage);
-		_deathState = new EnemyDeathState(this, base.stateMachine, IEnemy.MachineBehavior.Death);
+		_deathState = new EnemyDeathState(this, base.stateMachine, IEnemy.MachineBehavior.InstantDeath);
 	}
 
 	protected override void Start()
@@ -59,7 +62,8 @@ public class Mole: Enemy
 		EnemyUpBaseInstance.Initialize(gameObject, this);
 		EnemyDownBaseInstance.Initialize(gameObject, this);
 		EnemyEscapedDoDamageBaseInstance.Initialize(gameObject, this);
-		EnemyDeathBaseInstance.Initialize(gameObject, this);
+		EnemyInstantDeathBaseInstance.Initialize(gameObject, this);
+		EnemyDelayedDeathBaseInstance.Initialize(gameObject, this);
 
 		base.stateMachine.Initialize(_idleState, IEnemy.MachineBehavior.IdleHidden);
 	}
@@ -80,7 +84,7 @@ public class Mole: Enemy
 				return _deathState;
 
 			default:
-				Debug.LogWarning($"State {state.HumanName()} not found for {this.name}");
+				Debug.LogWarning($"State {state} not found for {this.name}");
 				return null;
 		}
 	}
@@ -99,18 +103,25 @@ public class Mole: Enemy
 				return EnemyDownBaseInstance;
 			case IEnemy.MachineBehavior.EscapedDoDamage:
 				return EnemyEscapedDoDamageBaseInstance;
-			case IEnemy.MachineBehavior.Death:
-				return EnemyDeathBaseInstance;
+			case IEnemy.MachineBehavior.InstantDeath:
+				return EnemyInstantDeathBaseInstance;
+			case IEnemy.MachineBehavior.DelayedDeath:
+				return EnemyDelayedDeathBaseInstance;
 
 			default:
-				Debug.LogWarning($"Behavior {behavior.HumanName()} not found for {this.name}");
+				Debug.LogWarning($"Behavior {behavior} not found for {this.name}");
 				return null;
 		}
 	}
 
-	public override void Kill()
+	public override void InstantKill()
 	{
-		base.stateMachine.ChangeState(GetState(IEnemy.MachineState.Death), IEnemy.MachineBehavior.Death);
+		base.stateMachine.ChangeState(GetState(IEnemy.MachineState.Death), IEnemy.MachineBehavior.InstantDeath);
+	}
+
+	public override void DelayedKill()
+	{
+		base.stateMachine.ChangeState(GetState(IEnemy.MachineState.Death), IEnemy.MachineBehavior.DelayedDeath);
 	}
 
 	#endregion
