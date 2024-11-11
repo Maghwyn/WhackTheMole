@@ -59,6 +59,11 @@ public class MiniGameDataManager : MonoBehaviour
 		}
 	}
 
+	public void HandleMoleEscapedDoDamage()
+	{
+		TakeDamage();
+	}
+
 	public void HandleMoleHit(MoleType moleType, int baseScore)
 	{
 		_lastHitTime = Time.time;
@@ -106,12 +111,7 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void HandleNotHitMole()
 	{
-		float currentMultiplier = _gameMultiplier.value;
-		float reduction = _multiplierTiers[_currentTier].penaltyReduction;
-		
-		_gameHP.ApplyChange(-1);
-		_gameMultiplier.SetValue(Mathf.Max(1f, currentMultiplier * reduction));
-		_currentCombo = 0;
+		TakeDamage();
 		
 		for (int i = _multiplierTiers.Length - 1; i >= 0; i--)
 		{
@@ -149,6 +149,16 @@ public class MiniGameDataManager : MonoBehaviour
 		{
 			_gameMultiplier.SetValue(_multiplierTiers[_currentTier].multiplierValue);
 		}
+	}
+
+	private void TakeDamage()
+	{
+		float currentMultiplier = _gameMultiplier.value;
+		float reduction = _multiplierTiers[_currentTier].penaltyReduction;
+		
+		_gameHP.ApplyChange(-1);
+		_gameMultiplier.SetValue(Mathf.Max(1f, currentMultiplier * reduction));
+		_currentCombo = 0;
 	}
 
 	private void AddScore(int baseScore)

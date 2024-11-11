@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Enemy Logic/Escaped Logic/Escaped Do Damage", fileName = "Escaped-Escaped-Do-Damage")]
 public class EnemyEscapedDoDamage : EnemyEscapedSOBase
 {
+	private MiniGameDataManager _miniGameDataManager;
 
 	public override void Initialize(GameObject gameObject, Enemy enemy)
 	{
 		base.Initialize(gameObject, enemy);
+		_miniGameDataManager = FindObjectOfType<MiniGameDataManager>();
 	}
 
 	public override void DoEnterLogic()
@@ -25,6 +25,7 @@ public class EnemyEscapedDoDamage : EnemyEscapedSOBase
 	{
 		base.DoFrameUpdateLogic();
 
+		_miniGameDataManager.HandleMoleEscapedDoDamage();
 		enemy.InvokeOnSelfDestroy();
 		Destroy(enemy.gameObject);
 	}
