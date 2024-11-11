@@ -2350,7 +2350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _miniGameUIManager: {fileID: 428278438}
   _spawnerManager: {fileID: 1981854979}
-  _highScoreManager: {fileID: 0}
+  _highScoreManager: {fileID: 1362915401}
   _hammerReturn: {fileID: 1769341454}
   _hammerEvent: {fileID: 594188966}
   _teleportEvent: {fileID: 419813347}
@@ -2873,7 +2873,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.15886435, g: 0.64566654, b: 0.9622642, a: 1}
     m_HighlightedColor: {r: 0.14640439, g: 0.5942488, b: 0.8867924, a: 1}
     m_PressedColor: {r: 0.09852261, g: 0.5068529, b: 0.7735849, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.16078432, g: 0.64705884, b: 0.9607844, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3315,6 +3315,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1348411733}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1362915401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6100326099936026446, guid: 64080e748a94c40cc9467f3801958c10,
+    type: 3}
+  m_PrefabInstance: {fileID: 1547542266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4642f729a637e463c8dc81c4c422ee65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1387095245
 GameObject:
   m_ObjectHideFlags: 0

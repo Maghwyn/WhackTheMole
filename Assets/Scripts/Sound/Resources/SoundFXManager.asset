@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7753cca761e674530a34a93c0556d2fd, type: 3}
   m_Name: SoundFXManager
   m_EditorClassIdentifier: 
-  SoundFXObject: {fileID: 2723138689293108800, guid: 6a76d78c45a1e4ab7b5f0f3127b449d3, type: 3}
+  SoundFXObject: {fileID: 3245025935155172981, guid: 1349d6005a9604f438880efdb910e172,
+    type: 3}
