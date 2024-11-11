@@ -4418,8 +4418,8 @@ MonoBehaviour:
     spawnTransform: {fileID: 1257209850}
     upperTransform: {fileID: 922357658}
     lowerTransform: {fileID: 2029244942}
-  _maxSpawnInterval: 2
-  _minSpawnInterval: 0.5
+  _maxSpawnInterval: 6
+  _minSpawnInterval: 3
   _maxSpawnEnemies: 5
   _noHitMoleSpawnRate: 0.3
   _goldenMoleSpawnRate: 0.15
