@@ -64,6 +64,11 @@ public class MiniGameUIManager : MonoBehaviour
 		ToggleRestartUI(true);
 	}
 
+	public void HideRestartUI()
+	{
+		ToggleRestartUI(false);
+	}
+
 	public void StartNewGameCountdown()
 	{
 		ToggleGameMessage(true);
