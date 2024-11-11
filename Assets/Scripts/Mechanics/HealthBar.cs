@@ -13,8 +13,6 @@ public class HealthBar : MonoBehaviour
 	{
 		float value = _gameHP.value / 5;
 		if (_healthBarFill.fillAmount == value) return;
-		Debug.Log(value);
-		Debug.Log(_gameHP.value);
 
 		_healthBarFill.fillAmount = value;
 	}
