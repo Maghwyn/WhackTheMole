@@ -4,6 +4,7 @@ using UnityEngine;
 public class HitEnemy : MonoBehaviour
 {
 	[SerializeField] private MiniGameDataManager _miniGameDataManager;
+	[SerializeField] private ParticleSystem _bonkParticles;
 
 	private Enemy _enemy;
 	private bool _isHit = false;
@@ -25,7 +26,7 @@ public class HitEnemy : MonoBehaviour
 		MoleType moleType = _enemy.type;
 		_miniGameDataManager.HandleMoleHit(moleType, _enemy.scorePoint);
 
-		// TODO: Instantiate a VFX prefab to create a hit effect
+		Instantiate(_bonkParticles, transform.position, Quaternion.identity);
 		_enemy.DelayedKill();
 	}
 }

@@ -563,6 +563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniGameDataManager: {fileID: 0}
+  _bonkParticles: {fileID: 5024009746357069192, guid: ec3f674830402cc45bce805cf6493db7,
+    type: 3}
 --- !u!1 &6493335902330300847
 GameObject:
   m_ObjectHideFlags: 0
