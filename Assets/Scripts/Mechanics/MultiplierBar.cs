@@ -6,9 +6,11 @@ public class MultiplierBar : MonoBehaviour
 {
 	[Header("Multiplier UI")]
 	[SerializeField] private TextMeshProUGUI _multiplierText;
+	[SerializeField] private TextMeshProUGUI _comboText;
 
 	[Header("Multiplier Data")]
 	[SerializeField] private FloatVariable _gameMultiplier;
+	[SerializeField] private IntVariable _gameCombo;
 
 	[Header("Text Scale Animation")]
 	[SerializeField] private float _maxScaleMultiplier = 1.5f;
@@ -18,11 +20,13 @@ public class MultiplierBar : MonoBehaviour
 	private Vector3 _originalScale;
 	private Coroutine _scaleCoroutine;
 	private float _lastMultiplier;
+	private int _lastCombo;
 
 	private void Start()
 	{
 		_originalScale = _multiplierText.transform.localScale;
 		_lastMultiplier = _gameMultiplier.value;
+		_lastCombo = _gameCombo.value;
 		UpdateMultiplierText();
 	}
 
@@ -33,6 +37,12 @@ public class MultiplierBar : MonoBehaviour
 			_lastMultiplier = _gameMultiplier.value;
 			UpdateMultiplierText();
 			StartScaleAnimation();
+		}
+
+		if (_gameCombo.value != _lastCombo)
+		{
+			_lastCombo = _gameCombo.value;
+			UpdateComboText();
 		}
 	}
 
@@ -72,5 +82,10 @@ public class MultiplierBar : MonoBehaviour
 	private void UpdateMultiplierText()
 	{
 		_multiplierText.text = $"x{_gameMultiplier.value}";
+	}
+
+	private void UpdateComboText()
+	{
+		_multiplierText.text = $"{_gameCombo.value}";
 	}
 }

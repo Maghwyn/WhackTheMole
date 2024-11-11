@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9116698, b: 0.61960787, a: 1}
+  m_Color: {r: 1, g: 0.7978235, b: 0.5990566, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -821,9 +821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dbf50ffcf524f39869af0e485702fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAmplitude: 10
-  rotationAmplitude: 5
-  frequency: 1
+  _scaleAmplitude: 10
+  _rotationAmplitude: 5
+  _frequency: 1
 --- !u!4 &6133825913242147684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7964513587813852806, guid: bc120531ca2e943a782c4c7e68c9632e,
@@ -951,6 +951,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dbf50ffcf524f39869af0e485702fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAmplitude: 10
-  rotationAmplitude: 5
-  frequency: 1
+  _scaleAmplitude: 10
+  _rotationAmplitude: 5
+  _frequency: 1

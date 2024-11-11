@@ -14,11 +14,13 @@ public class MiniGameDataManager : MonoBehaviour
 	[SerializeField] private int _defaultGameHP = 5;
 	[SerializeField] private int _defaultGameScore = 0;
 	[SerializeField] private float _defaultGameMultiplier = 1;
+	[SerializeField] private int _defaultGameCombo = 0;
 
 	[Header("Game Data")]
 	[SerializeField] private FloatVariable _gameHP;
 	[SerializeField] private IntVariable _gameScore;
 	[SerializeField] private FloatVariable _gameMultiplier;
+	[SerializeField] private IntVariable _gameCombo;
 
 	[Header("Multiplier Settings")]
 	[SerializeField] private MultiplierTier[] _multiplierTiers = new MultiplierTier[]
@@ -35,8 +37,7 @@ public class MiniGameDataManager : MonoBehaviour
 
 	[Header("Sounds")]
 	[SerializeField] private AudioClip _bonkClip;
-	
-	private int _currentCombo = 0;
+
 	private float _lastHitTime;
 	private int _currentTier = 0;
 	public bool isOutOfHealth => _gameHP.value <= 0;
@@ -47,6 +48,7 @@ public class MiniGameDataManager : MonoBehaviour
 		_gameHP.value = _defaultGameHP;
 		_gameScore.value = _defaultGameScore;
 		_gameMultiplier.value = _defaultGameMultiplier;
+		_gameCombo.value = _defaultGameCombo;
 	}
 
 	private void Start()
@@ -56,7 +58,7 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (Time.time - _lastHitTime > _comboTimeWindow && _currentCombo > 0)
+		if (Time.time - _lastHitTime > _comboTimeWindow && _gameCombo.value > 0)
 		{
 			ResetCombo();
 		}
@@ -91,14 +93,14 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void HandleRegularMole(int baseScore)
 	{
-		_currentCombo++;
+		_gameCombo.ApplyChange(1);
 		UpdateMultiplierTier();
 		AddScore(baseScore);
 	}
 
 	private void HandleGoldenMole(int baseScore)
 	{
-		_currentCombo += 5;
+		_gameCombo.ApplyChange(5);
 		UpdateMultiplierTier();
 		AddScore(baseScore * 2);
 	}
@@ -108,7 +110,7 @@ public class MiniGameDataManager : MonoBehaviour
 		if (_gameHP.value < 5)
 			_gameHP.ApplyChange(1);
 
-		_currentCombo += 1;
+		_gameCombo.ApplyChange(1);
 		UpdateMultiplierTier();
 		AddScore(baseScore);
 	}
@@ -134,7 +136,7 @@ public class MiniGameDataManager : MonoBehaviour
 			MultiplierTier current = _multiplierTiers[_currentTier];
 			MultiplierTier next = _multiplierTiers[_currentTier + 1];
 
-			if (_currentCombo >= next.hitsNeeded)
+			if (_gameCombo.value >= next.hitsNeeded)
 			{
 				_currentTier++;
 				_gameMultiplier.SetValue(next.multiplierValue);
@@ -142,7 +144,7 @@ public class MiniGameDataManager : MonoBehaviour
 			else
 			{
 				// Calculate the proportion of progress within the current tier range
-				float progress = (float)(_currentCombo - current.hitsNeeded) / (next.hitsNeeded - current.hitsNeeded);
+				float progress = (float)(_gameCombo.value - current.hitsNeeded) / (next.hitsNeeded - current.hitsNeeded);
 				float interpolatedMultiplier = Mathf.Lerp(current.multiplierValue, next.multiplierValue, progress);
 
 				interpolatedMultiplier = Mathf.Round(interpolatedMultiplier * 100f) / 100f;
@@ -162,7 +164,7 @@ public class MiniGameDataManager : MonoBehaviour
 		
 		_gameHP.ApplyChange(-1);
 		_gameMultiplier.SetValue(Mathf.Max(1f, currentMultiplier * reduction));
-		_currentCombo = 0;
+		_gameCombo.SetValue(0);
 	}
 
 	private void AddScore(int baseScore)
@@ -173,7 +175,7 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void ResetCombo()
 	{
-		_currentCombo = 0;
+		_gameCombo.SetValue(0);
 		ResetMultiplier();
 	}
 
