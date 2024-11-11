@@ -32,6 +32,9 @@ public class MiniGameDataManager : MonoBehaviour
 	};
 
 	[SerializeField] private float _comboTimeWindow = 2.5f;
+
+	[Header("Sounds")]
+	[SerializeField] private AudioClip _bonkClip;
 	
 	private int _currentCombo = 0;
 	private float _lastHitTime;
@@ -67,6 +70,7 @@ public class MiniGameDataManager : MonoBehaviour
 	public void HandleMoleHit(MoleType moleType, int baseScore)
 	{
 		_lastHitTime = Time.time;
+		SoundFXManagerSO.PlaySoundFXClip(_bonkClip, transform.position, 0.5f);
 
 		switch (moleType)
 		{
