@@ -1,13 +1,12 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public sealed class EnemyMovementMechanic : MonoBehaviour
 {
 	[Header("General Settings")]
-	[SerializeField] private float _upSpeed = 50f;
-	[SerializeField] private float _downSpeed = 35f;
+	[SerializeField] private float _upSpeed = 15;
+	[SerializeField] private float _downSpeed = 5f;
 
 	private Rigidbody _rb;
 
@@ -43,6 +42,7 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 
 		float _speedFactor = Mathf.SmoothStep(0, _speed, distance / 10f);
 		Vector3 velocity = directionVector * _speedFactor;
+
 		_rb.MovePosition(_rb.position + velocity);
 
 		// Snap if close to target
