@@ -36,7 +36,8 @@ public class MiniGameDataManager : MonoBehaviour
 	[SerializeField] private float _comboTimeWindow = 2.5f;
 
 	[Header("Sounds")]
-	[SerializeField] private AudioClip _bonkClip;
+	[SerializeField] private AudioClip _bonkHitClip;
+	[SerializeField] private AudioClip _loseHpClip;
 
 	private float _lastHitTime;
 	private int _currentTier = 0;
@@ -66,26 +67,30 @@ public class MiniGameDataManager : MonoBehaviour
 
 	public void HandleMoleEscapedDoDamage()
 	{
+		SoundFXManagerSO.PlaySoundFXClip(_loseHpClip, transform.position, 0.5f);
 		TakeDamage();
 	}
 
 	public void HandleMoleHit(MoleType moleType, int baseScore)
 	{
 		_lastHitTime = Time.time;
-		SoundFXManagerSO.PlaySoundFXClip(_bonkClip, transform.position, 0.5f);
 
 		switch (moleType)
 		{
 			case MoleType.Regular:
+				SoundFXManagerSO.PlaySoundFXClip(_bonkHitClip, transform.position, 0.5f);
 				HandleRegularMole(baseScore);
 				break;
 			case MoleType.Golden:
+				SoundFXManagerSO.PlaySoundFXClip(_bonkHitClip, transform.position, 0.5f);
 				HandleGoldenMole(baseScore);
 				break;
 			case MoleType.Health:
+				SoundFXManagerSO.PlaySoundFXClip(_bonkHitClip, transform.position, 0.5f);
 				HandleHealthMole(baseScore);
 				break;
 			case MoleType.NoHit:
+				SoundFXManagerSO.PlaySoundFXClip(_loseHpClip, transform.position, 0.5f);
 				HandleNotHitMole();
 				break;
 		}
