@@ -125,6 +125,7 @@ public class MiniGameManager : MonoBehaviour
 	public void OnRestartMiniGame()
 	{
 		_miniGameDataManager.ResetMiniGameData();
+		_miniGameUIManager.HideRestartUI();
 
 		if (_hammerEvent.isGrabbed)
 		{
