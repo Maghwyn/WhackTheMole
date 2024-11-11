@@ -49,7 +49,7 @@ public class MiniGameManager : MonoBehaviour
 		_miniGameUIManager.OnStartNewGameComplete -= RunMiniGame;
 		_miniGameUIManager.OnResumeGameComplete -= RunMiniGame;
 
-		_spawnerManager.EndTask();
+		_spawnerManager.TerminateSpawAndInteraction();
 		_spawnerManager.enabled = false;
 
 		_miniGameUIManager.ForceStopResumeCountdownIfRunning();
@@ -70,7 +70,7 @@ public class MiniGameManager : MonoBehaviour
 			_hammerEvent.OnHammerHandGrab -= ResumeMiniGame;
 			_hammerEvent.OnHammerHandDrop -= PauseMiniGame;
 
-			_spawnerManager.EndTask();
+			_spawnerManager.TerminateSpawAndInteraction();
 			_spawnerManager.enabled = false;
 
 			_miniGameUIManager.UpdateFinalScoreText(_miniGameDataManager.score);
@@ -94,14 +94,15 @@ public class MiniGameManager : MonoBehaviour
 
 	private void RunMiniGame()
 	{
+		_spawnerManager.enabled = true;
+
 		if (_isGamePaused)
 		{
 			_miniGameUIManager.OnResumeGameComplete -= RunMiniGame;
+			_spawnerManager.ResumeSpawAndInteraction();
 		}
 
 		_isGamePaused = false;
-		_spawnerManager.enabled = true;
-
 		_miniGameUIManager.HideStartingMessage();
 	}
 
@@ -121,7 +122,7 @@ public class MiniGameManager : MonoBehaviour
 		}
 
 		_isGamePaused = true;
-		_spawnerManager.enabled = false;
+		_spawnerManager.PauseSpawnAndInteraction();
 
 		_miniGameUIManager.ForceStopNewGameCountdownIfRunning();
 		_miniGameUIManager.ShowPauseMessage();

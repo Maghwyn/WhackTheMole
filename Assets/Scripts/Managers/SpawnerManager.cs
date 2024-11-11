@@ -51,15 +51,33 @@ public class SpawnerManager : MonoBehaviour
 
 	private void OnEnable()
 	{
+		StartTask();
+	}
+
+	public void TerminateSpawAndInteraction()
+	{
+		EndTask();
+		KillAllEnemies();
+	}
+
+	public void ResumeSpawAndInteraction()
+	{
+		StartTask();
+		UnPauseAllEnemies();
+	}
+
+	public void PauseSpawnAndInteraction()
+	{
+		EndTask();
+		PauseAllEnemies();
+	}
+
+	private void StartTask()
+	{
 		_spawnEnemiesCoroutine ??= StartCoroutine(SpawnEnemiesAtInterval());
 	}
 
-	private void OnDisable()
-	{
-		EndTask();
-	}
-
-	public void EndTask()
+	private void EndTask()
 	{
 		if (_spawnEnemiesCoroutine != null)
 		{
@@ -67,7 +85,6 @@ public class SpawnerManager : MonoBehaviour
 			_spawnEnemiesCoroutine = null;
 		}
 
-		KillAllEnemies();
 	}
 
 	IEnumerator SpawnEnemiesAtInterval()
@@ -128,6 +145,22 @@ public class SpawnerManager : MonoBehaviour
 			enemy.InstantKill();
 		}
 		_enemies.Clear();
+	}
+
+	private void PauseAllEnemies()
+	{
+		foreach (var enemy in _enemies.Values)
+		{
+			enemy.Freeze();
+		}
+	}
+
+	private void UnPauseAllEnemies()
+	{
+		foreach (var enemy in _enemies.Values)
+		{
+			enemy.UnFreeze();
+		}
 	}
 
 	private void OnEnemyDestroy(int keyIndex)
