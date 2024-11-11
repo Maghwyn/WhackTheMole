@@ -20,7 +20,7 @@ public class MiniGameManager : MonoBehaviour
 	private void Awake()
 	{
 		_miniGameUIManager = gameObject.GetComponentInChildren<MiniGameUIManager>();
-		_miniGameUIManager.HideAllUI();
+		_miniGameUIManager.HideUI();
 		_spawnerManager.enabled = false;
 
 		_teleportEvent.OnAnchorEnter += PreInitGame;
@@ -54,7 +54,7 @@ public class MiniGameManager : MonoBehaviour
 		_miniGameUIManager.ForceStopResumeCountdownIfRunning();
 		_miniGameUIManager.ForceStopNewGameCountdownIfRunning();
 
-		_miniGameUIManager.HideAllUI();
+		_miniGameUIManager.HideUI();
 		_hammerReturn.ForceReturnToSocket();
 
 		_isGamePaused = false;
@@ -71,6 +71,7 @@ public class MiniGameManager : MonoBehaviour
 			_spawnerManager.EndTask();
 			_spawnerManager.enabled = false;
 
+			_miniGameUIManager.UpdateFinalScoreText(_miniGameDataManager.score);
 			_miniGameUIManager.ShowRestartUI();
 			_highScoreManager.AddNewScore(_miniGameDataManager.score);
 		}

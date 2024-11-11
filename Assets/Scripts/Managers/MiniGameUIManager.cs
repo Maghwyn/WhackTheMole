@@ -10,10 +10,11 @@ public class MiniGameUIManager : MonoBehaviour
 	[SerializeField] private GameObject _startingMessageUI;
 	[SerializeField] private GameObject _restartUI;
 
-	[Header("Countdown UI")]
+	[Header("Message UI")]
 	[SerializeField] private GameObject _gameMessageUI;
 	[SerializeField] private Image _gameMessageBackground;
 	[SerializeField] private TextMeshProUGUI _gameMessageText;
+	[SerializeField] private TextMeshProUGUI _scorePointText;
 
 	[Header("Stats UI")]
 	[SerializeField] private GameObject _lifeUI;
@@ -24,15 +25,16 @@ public class MiniGameUIManager : MonoBehaviour
 	public event Action OnResumeGameComplete;
 	private Coroutine _newGameCountdownCoroutine;
 	private Coroutine _resumeCountdownCoroutine;
+	private Color _colorGreen = new(118/255, 214/255, 126/255, 235/255);
+	private Color _colorRed = new(214/255, 118/255, 124/255, 235/255);
+	private Color _colorOrange = new(214/255, 178/255, 118/255, 235/255);
 
-	public void HideAllUI()
+	public void HideUI()
 	{
 		ToggleStartingMessage(false);
 		ToggleGameMessage(false);
-		ToggleMiniGameLife(false);
-		ToggleMiniGameScore(false);
-		ToggleMiniGameMultiplier(false);
 		ToggleRestartUI(false);
+		ShowGameUI();
 	}
 
 	public void ShowGameUI()
@@ -56,7 +58,7 @@ public class MiniGameUIManager : MonoBehaviour
 	{
 		ToggleGameMessage(true);
 		_gameMessageText.text = "Paused";
-		_gameMessageBackground.color = Color.red;
+		_gameMessageBackground.color = _colorRed;
 	}
 
 	public void ShowRestartUI()
@@ -67,6 +69,12 @@ public class MiniGameUIManager : MonoBehaviour
 	public void HideRestartUI()
 	{
 		ToggleRestartUI(false);
+	}
+
+	public void UpdateFinalScoreText(int score)
+	{
+		string point = score > 0 ? "points" : "point";
+		_scorePointText.text = $"{score} {point}!";
 	}
 
 	public void StartNewGameCountdown()
@@ -101,9 +109,7 @@ public class MiniGameUIManager : MonoBehaviour
 
 	private IEnumerator StartingNewGameCoroutine()
 	{
-		yield return new WaitForSeconds(0.5f);
-
-		_gameMessageBackground.color = Color.green;
+		_gameMessageBackground.color = _colorGreen;
 
 		for (int i = 3; i > 0; i--)
 		{
@@ -115,7 +121,6 @@ public class MiniGameUIManager : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 
 		ToggleGameMessage(false);
-		ShowGameUI();
 
 		OnStartNewGameComplete.Invoke();
 		_newGameCountdownCoroutine = null;
@@ -123,10 +128,7 @@ public class MiniGameUIManager : MonoBehaviour
 
 	private IEnumerator ResumingGameCoroutine()
 	{
-		yield return new WaitForSeconds(0.5f);
-
-		// Orange
-		_gameMessageBackground.color = new Color(255/255, 128/255, 0);
+		_gameMessageBackground.color = _colorOrange;
 
 		for (int i = 3; i > 0; i--)
 		{
@@ -138,7 +140,6 @@ public class MiniGameUIManager : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 
 		ToggleGameMessage(false);
-		ShowGameUI();
 
 		OnResumeGameComplete.Invoke();
 		_resumeCountdownCoroutine = null;
