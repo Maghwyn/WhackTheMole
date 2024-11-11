@@ -10,6 +10,11 @@ public class MultiplierTier
 
 public class MiniGameDataManager : MonoBehaviour
 {
+	[Header("Game Base Data")]
+	[SerializeField] private int _defaultGameHP = 5;
+	[SerializeField] private int _defaultGameScore = 0;
+	[SerializeField] private float _defaultGameMultiplier = 1;
+
 	[Header("Game Data")]
 	[SerializeField] private IntVariable _gameHP;
 	[SerializeField] private IntVariable _gameScore;
@@ -33,6 +38,13 @@ public class MiniGameDataManager : MonoBehaviour
 	private int _currentTier = 0;
 	public bool isOutOfHealth => _gameHP.value <= 0;
 	public int score => _gameScore.value;
+
+	private void OnEnable()
+	{
+		_gameHP.value = _defaultGameHP;
+		_gameScore.value = _defaultGameScore;
+		_gameMultiplier.value = _defaultGameMultiplier;
+	}
 
 	private void Start()
 	{
