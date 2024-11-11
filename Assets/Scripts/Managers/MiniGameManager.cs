@@ -137,5 +137,4 @@ public class MiniGameManager : MonoBehaviour
 			_miniGameUIManager.ShowStartingMessage();
 		}
 	}
-
 }

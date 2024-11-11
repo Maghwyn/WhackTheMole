@@ -6,6 +6,7 @@ public class HitEnemy : MonoBehaviour
 	[SerializeField] private MiniGameDataManager _miniGameDataManager;
 
 	private Enemy _enemy;
+	private bool _isHit = false;
 
 	public void Start()
 	{
@@ -15,9 +16,11 @@ public class HitEnemy : MonoBehaviour
 
 	private void OnTriggerEnter(Collider collider)
 	{
+		if (_isHit) return;
+
 		GameObject GO = collider.gameObject;
 		if (!GO.CompareTag("Hammer")) return;
-
+		_isHit = true;
 
 		MoleType moleType = _enemy.type;
 		_miniGameDataManager.HandleMoleHit(moleType, _enemy.scorePoint);
