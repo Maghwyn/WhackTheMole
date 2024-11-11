@@ -25,9 +25,9 @@ public class MiniGameUIManager : MonoBehaviour
 	public event Action OnResumeGameComplete;
 	private Coroutine _newGameCountdownCoroutine;
 	private Coroutine _resumeCountdownCoroutine;
-	private Color _colorGreen = new(118/255, 214/255, 126/255, 235/255);
-	private Color _colorRed = new(214/255, 118/255, 124/255, 235/255);
-	private Color _colorOrange = new(214/255, 178/255, 118/255, 235/255);
+	private Color _colorGreen = new(118f/255, 214f/255, 126f/255, 235f/255);
+	private Color _colorRed = new(214f/255, 118f/255, 124f/255, 235f/255);
+	private Color _colorOrange = new(214f/255, 178f/255, 118f/255, 235f/255);
 
 	public void HideUI()
 	{
