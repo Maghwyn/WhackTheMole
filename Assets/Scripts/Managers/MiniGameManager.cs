@@ -16,6 +16,7 @@ public class MiniGameManager : MonoBehaviour
 
 	private MiniGameDataManager _miniGameDataManager;
 	private bool _isGamePaused = false;
+	private bool _isGameRunning = false;
 
 	private void Awake()
 	{
@@ -58,12 +59,13 @@ public class MiniGameManager : MonoBehaviour
 		_hammerReturn.ForceReturnToSocket();
 
 		_isGamePaused = false;
+		_isGameRunning = false;
 		_miniGameDataManager.ResetMiniGameData();
 	}
 
 	private void Update()
 	{
-		if (_miniGameDataManager.isOutOfHealth)
+		if (_miniGameDataManager.isOutOfHealth && _isGameRunning)
 		{
 			_hammerEvent.OnHammerHandGrab -= ResumeMiniGame;
 			_hammerEvent.OnHammerHandDrop -= PauseMiniGame;
@@ -74,11 +76,13 @@ public class MiniGameManager : MonoBehaviour
 			_miniGameUIManager.UpdateFinalScoreText(_miniGameDataManager.score);
 			_miniGameUIManager.ShowRestartUI();
 			_highScoreManager.AddNewScore(_miniGameDataManager.score);
+			_isGameRunning = false;
 		}
 	}
 
 	private void InitMiniGame()
 	{
+		_isGameRunning = true;
 		_hammerEvent.OnHammerHandGrab -= InitMiniGame;
 		_hammerEvent.OnHammerHandGrab += ResumeMiniGame;
 		_hammerEvent.OnHammerHandDrop += PauseMiniGame;
