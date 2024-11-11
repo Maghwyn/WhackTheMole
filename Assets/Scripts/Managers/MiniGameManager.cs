@@ -34,7 +34,7 @@ public class MiniGameManager : MonoBehaviour
 
 	private void PreInitGame()
 	{
-		_hammerEvent.OnHammerGrab += InitMiniGame;
+		_hammerEvent.OnHammerHandGrab += InitMiniGame;
 		_miniGameUIManager.ShowStartingMessage();
 	}
 
@@ -42,9 +42,9 @@ public class MiniGameManager : MonoBehaviour
 	{
 		// Make sure everything is reset even if it's unnecessary as it's "safe" anyway.
 
-		_hammerEvent.OnHammerGrab -= InitMiniGame;
-		_hammerEvent.OnHammerGrab -= ResumeMiniGame;
-		_hammerEvent.OnHammerGrab -= PauseMiniGame;
+		_hammerEvent.OnHammerHandGrab -= InitMiniGame;
+		_hammerEvent.OnHammerHandGrab -= ResumeMiniGame;
+		_hammerEvent.OnHammerHandDrop -= PauseMiniGame;
 		_miniGameUIManager.OnStartNewGameComplete -= RunMiniGame;
 		_miniGameUIManager.OnResumeGameComplete -= RunMiniGame;
 
@@ -65,8 +65,8 @@ public class MiniGameManager : MonoBehaviour
 	{
 		if (_miniGameDataManager.isOutOfHealth)
 		{
-			_hammerEvent.OnHammerGrab -= ResumeMiniGame;
-			_hammerEvent.OnHammerDrop -= PauseMiniGame;
+			_hammerEvent.OnHammerHandGrab -= ResumeMiniGame;
+			_hammerEvent.OnHammerHandDrop -= PauseMiniGame;
 
 			_spawnerManager.EndTask();
 			_spawnerManager.enabled = false;
@@ -78,9 +78,9 @@ public class MiniGameManager : MonoBehaviour
 
 	private void InitMiniGame()
 	{
-		_hammerEvent.OnHammerGrab -= InitMiniGame;
-		_hammerEvent.OnHammerGrab += ResumeMiniGame;
-		_hammerEvent.OnHammerDrop += PauseMiniGame;
+		_hammerEvent.OnHammerHandGrab -= InitMiniGame;
+		_hammerEvent.OnHammerHandGrab += ResumeMiniGame;
+		_hammerEvent.OnHammerHandDrop += PauseMiniGame;
 
 		_miniGameUIManager.OnStartNewGameComplete += RunMiniGame;
 		_miniGameUIManager.HideStartingMessage();
@@ -127,13 +127,13 @@ public class MiniGameManager : MonoBehaviour
 		_miniGameDataManager.ResetMiniGameData();
 		_miniGameUIManager.HideRestartUI();
 
-		if (_hammerEvent.isGrabbed)
+		if (_hammerEvent.isGrabbedByHand)
 		{
 			InitMiniGame();
 		}
 		else
 		{
-			_hammerEvent.OnHammerGrab += InitMiniGame;
+			_hammerEvent.OnHammerHandGrab += InitMiniGame;
 			_miniGameUIManager.ShowStartingMessage();
 		}
 	}

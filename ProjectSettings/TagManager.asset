@@ -8,6 +8,9 @@ TagManager:
   - Mole
   - SafeMole
   - Hammer
+  - RightHandInteractor
+  - LeftHandInteractor
+  - SocketInteractor
   layers:
   - Default
   - TransparentFX
