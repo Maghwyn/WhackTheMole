@@ -694,7 +694,7 @@ MonoBehaviour:
   _gameHP: {fileID: 11400000, guid: 3b76e0f065694844fa80ed11bad80f6b, type: 2}
   _gameScore: {fileID: 11400000, guid: be2da0818dffb41b88a59f9e4abd2f60, type: 2}
   _gameMultiplier: {fileID: 11400000, guid: b6df4940f3d1b4c39af8d7cfca81bb19, type: 2}
-  _gameCombo: {fileID: 0}
+  _gameCombo: {fileID: 11400000, guid: 2bef57e34667d406d842cfda8c00a7a2, type: 2}
   _multiplierTiers:
   - multiplierValue: 1
     hitsNeeded: 0
@@ -715,7 +715,8 @@ MonoBehaviour:
     hitsNeeded: 150
     penaltyReduction: 0.7
   _comboTimeWindow: 2.5
-  _bonkClip: {fileID: 8300000, guid: b6ef20f64f521488ab7be44993751bcd, type: 3}
+  _bonkHitClip: {fileID: 8300000, guid: b6ef20f64f521488ab7be44993751bcd, type: 3}
+  _loseHpClip: {fileID: 8300000, guid: fc593cc5a54fa430ab26306cf9588175, type: 3}
 --- !u!4 &350108170
 Transform:
   m_ObjectHideFlags: 0
