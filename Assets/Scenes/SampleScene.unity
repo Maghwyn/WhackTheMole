@@ -564,6 +564,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8b71ee8faba4ec3ad11762595dd1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultGameHP: 5
+  _defaultGameScore: 0
+  _defaultGameMultiplier: 1
   _gameHP: {fileID: 11400000, guid: 3b76e0f065694844fa80ed11bad80f6b, type: 2}
   _gameScore: {fileID: 11400000, guid: be2da0818dffb41b88a59f9e4abd2f60, type: 2}
   _gameMultiplier: {fileID: 11400000, guid: b6df4940f3d1b4c39af8d7cfca81bb19, type: 2}

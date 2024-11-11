@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd2fe1f9ae5840629a32b78421ea84e, type: 3}
   m_Name: GameMultiplier
   m_EditorClassIdentifier: 
-  value: 15
+  value: 1
