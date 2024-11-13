@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5857257868914081860}
   m_Layer: 0
   m_Name: RegularMole2
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

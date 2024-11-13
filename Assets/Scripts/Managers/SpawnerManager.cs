@@ -30,6 +30,7 @@ public class SpawnerManager : MonoBehaviour
 	[SerializeField] private GameObject _noHitMolePrefab;
 	[SerializeField] private GameObject _goldenMolePrefab;
 	[SerializeField] private GameObject _healthMolePrefab;
+	[SerializeField] private List<GameObject> _regularMolePrefabs;
 
 	[Header("SO Float References")]
 	[SerializeField] private FloatVariable _rate;
@@ -124,8 +125,9 @@ public class SpawnerManager : MonoBehaviour
 		randomValue -= _goldenMoleSpawnRate;
 		if (randomValue < _noHitMoleSpawnRate)
 			return _noHitMolePrefab;
-			
-		return _regularMolePrefab;
+		
+		int randomIndex = Random.Range(0, _regularMolePrefabs.Count);
+		return _regularMolePrefabs[randomIndex];
 	}
 
 	private MoleHole GetRandomFreeMoleHole()

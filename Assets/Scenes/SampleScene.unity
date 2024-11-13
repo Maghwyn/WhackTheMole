@@ -694,7 +694,7 @@ MonoBehaviour:
   _gameHP: {fileID: 11400000, guid: 3b76e0f065694844fa80ed11bad80f6b, type: 2}
   _gameScore: {fileID: 11400000, guid: be2da0818dffb41b88a59f9e4abd2f60, type: 2}
   _gameMultiplier: {fileID: 11400000, guid: b6df4940f3d1b4c39af8d7cfca81bb19, type: 2}
-  _gameCombo: {fileID: 0}
+  _gameCombo: {fileID: 11400000, guid: 2bef57e34667d406d842cfda8c00a7a2, type: 2}
   _multiplierTiers:
   - multiplierValue: 1
     hitsNeeded: 0
@@ -5689,6 +5689,11 @@ MonoBehaviour:
   _noHitMolePrefab: {fileID: 0}
   _goldenMolePrefab: {fileID: 0}
   _healthMolePrefab: {fileID: 0}
+  _regularMolePrefabs:
+  - {fileID: 3468923353853503215, guid: bb9e7307e134a7c468a83ca9f05abcf4, type: 3}
+  - {fileID: 1561235398121735986, guid: 225ea7ab0a89848048d5324da91c5971, type: 3}
+  - {fileID: 3293760084732284659, guid: 774475430d0344a069c885a64cf04750, type: 3}
+  - {fileID: 6763204872926675607, guid: aab370b4622d24761a612e5f05e40413, type: 3}
   _rate: {fileID: 11400000, guid: 9555868bc67ca9c4f9aaf48b8a7d6ba3, type: 2}
 --- !u!4 &1990575210 stripped
 Transform:
@@ -9326,7 +9331,7 @@ PrefabInstance:
     - target: {fileID: 6763204872926675607, guid: aab370b4622d24761a612e5f05e40413,
         type: 3}
       propertyPath: m_Name
-      value: RegularMole3
+      value: Mole.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
