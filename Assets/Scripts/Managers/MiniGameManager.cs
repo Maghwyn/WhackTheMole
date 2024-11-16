@@ -31,6 +31,7 @@ public class MiniGameManager : MonoBehaviour
 	private void Start()
 	{
 		_miniGameDataManager = FindObjectOfType<MiniGameDataManager>();
+		RunMiniGame();
 	}
 
 	private void PreInitGame()

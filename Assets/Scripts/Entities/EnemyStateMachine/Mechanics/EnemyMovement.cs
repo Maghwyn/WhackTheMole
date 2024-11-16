@@ -1,12 +1,16 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public sealed class EnemyMovementMechanic : MonoBehaviour
 {
 	[Header("General Settings")]
-	[SerializeField] private float _upSpeed = 15;
+	[SerializeField] private float _upSpeed = 15f;
 	[SerializeField] private float _downSpeed = 5f;
+	[SerializeField] private float _max_speed = 25f;
+	private static float _speedMultiplier;
+
 
 	private Rigidbody _rb;
 
@@ -25,6 +29,14 @@ public sealed class EnemyMovementMechanic : MonoBehaviour
 	private void Awake()
 	{
 		_rb = GetComponent<Rigidbody>();
+	}
+
+	public void SetSpeedMultiplier(float multiplier)
+	{
+		//multiplies velocity, this is done in a coroutine in SpawnerManager
+		_speedMultiplier = multiplier;
+		_upSpeed = Mathf.Min(_max_speed, _upSpeed * _speedMultiplier);
+		_downSpeed = Mathf.Min(_max_speed, _downSpeed * _speedMultiplier);
 	}
 
 	internal void PerformMovement(MovementDirection direction)

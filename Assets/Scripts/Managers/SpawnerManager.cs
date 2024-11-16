@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
@@ -19,6 +20,8 @@ public class SpawnerManager : MonoBehaviour
 	[SerializeField] private float _maxSpawnInterval = 2f;
 	[SerializeField] private float _minSpawnInterval = 0.5f;
 	[SerializeField] private int _maxSpawnEnemies = 5;
+	[SerializeField] private float _speedGrowth = 0.05f;
+	[SerializeField] private static float _speedMultiplier = 1f;
 
 	[Header("Spawn Rates")]
 	[SerializeField] private float _noHitMoleSpawnRate = 0.3f;
@@ -39,6 +42,12 @@ public class SpawnerManager : MonoBehaviour
 	private float _currentSpawnInterval;
 	private readonly Dictionary<int, Enemy> _enemies = new();
 	private Coroutine _spawnEnemiesCoroutine;
+	private Coroutine _increaseSpeedOverTimeCoroutine;
+
+	private void Start()
+	{
+		_speedMultiplier = 1f;
+	}
 
 	private void Awake()
 	{
@@ -76,6 +85,7 @@ public class SpawnerManager : MonoBehaviour
 	private void StartTask()
 	{
 		_spawnEnemiesCoroutine ??= StartCoroutine(SpawnEnemiesAtInterval());
+		_increaseSpeedOverTimeCoroutine ??= StartCoroutine(IncreaseSpeedOvertime());
 	}
 
 	private void EndTask()
@@ -83,6 +93,7 @@ public class SpawnerManager : MonoBehaviour
 		if (_spawnEnemiesCoroutine != null)
 		{
 			StopCoroutine(_spawnEnemiesCoroutine);
+			StopCoroutine(_increaseSpeedOverTimeCoroutine);
 			_spawnEnemiesCoroutine = null;
 		}
 
@@ -96,6 +107,15 @@ public class SpawnerManager : MonoBehaviour
 			yield return new WaitForSeconds(_currentSpawnInterval);
 		}
 	}
+	
+	IEnumerator IncreaseSpeedOvertime()
+	{
+		for (;;)
+		{
+			_speedMultiplier += _speedGrowth;
+			yield return new WaitForSeconds(3f);
+		}
+	}
 
 	private void SpawnEnemy()
 	{
@@ -104,6 +124,7 @@ public class SpawnerManager : MonoBehaviour
 
 		GameObject enemyGO = Instantiate(prefab, moleHole.spawnTransform.position, _moleRotation);
 		Enemy enemy = enemyGO.GetComponent<Enemy>();
+		// enemy.GetComponent<EnemyMovementMechanic>().SetSpeedMultiplier(_speedMultiplier);
 		enemy.movement.InitializeMaxMinPosition(moleHole.upperTransform.position, moleHole.lowerTransform.position);
 
 		enemy.OnSelfDestroy += () => OnEnemyDestroy(moleHole.index);

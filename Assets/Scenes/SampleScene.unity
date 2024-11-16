@@ -5682,13 +5682,18 @@ MonoBehaviour:
   _maxSpawnInterval: 6
   _minSpawnInterval: 3
   _maxSpawnEnemies: 5
+  _speedGrowth: 0.1
   _noHitMoleSpawnRate: 0.3
   _goldenMoleSpawnRate: 0.15
   _healthMoleSpawnRate: 0.05
-  _regularMolePrefab: {fileID: 0}
-  _noHitMolePrefab: {fileID: 0}
-  _goldenMolePrefab: {fileID: 0}
-  _healthMolePrefab: {fileID: 0}
+  _regularMolePrefab: {fileID: 3468923353853503215, guid: bb9e7307e134a7c468a83ca9f05abcf4,
+    type: 3}
+  _noHitMolePrefab: {fileID: 2365200803730001687, guid: d5fe0fa67e7de5141a06cfe092b268d5,
+    type: 3}
+  _goldenMolePrefab: {fileID: 4870679272826176154, guid: 2af5ef5f5f8334dbeb5a0a005b979f35,
+    type: 3}
+  _healthMolePrefab: {fileID: 8402933151275590269, guid: e4405e3a05b42497e8729489891b46dc,
+    type: 3}
   _regularMolePrefabs:
   - {fileID: 3468923353853503215, guid: bb9e7307e134a7c468a83ca9f05abcf4, type: 3}
   - {fileID: 1561235398121735986, guid: 225ea7ab0a89848048d5324da91c5971, type: 3}
