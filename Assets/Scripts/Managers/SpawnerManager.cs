@@ -124,7 +124,7 @@ public class SpawnerManager : MonoBehaviour
 
 		GameObject enemyGO = Instantiate(prefab, moleHole.spawnTransform.position, _moleRotation);
 		Enemy enemy = enemyGO.GetComponent<Enemy>();
-		// enemy.GetComponent<EnemyMovementMechanic>().SetSpeedMultiplier(_speedMultiplier);
+		enemy.GetComponent<EnemyMovementMechanic>().SetSpeedMultiplier(_speedMultiplier);
 		enemy.movement.InitializeMaxMinPosition(moleHole.upperTransform.position, moleHole.lowerTransform.position);
 
 		enemy.OnSelfDestroy += () => OnEnemyDestroy(moleHole.index);
