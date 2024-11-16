@@ -1858,6 +1858,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 1978823590789231121, guid: a2174b5c23591dd4488b4cbf1f4aaf58,
+        type: 3}
+      propertyPath: m_AttachTransform
+      value: 
+      objectReference: {fileID: 897247954}
     - target: {fileID: 8058466776167252383, guid: a2174b5c23591dd4488b4cbf1f4aaf58,
         type: 3}
       propertyPath: m_Name
@@ -1865,7 +1870,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1290567563509693369, guid: a2174b5c23591dd4488b4cbf1f4aaf58,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 897247954}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2174b5c23591dd4488b4cbf1f4aaf58, type: 3}
 --- !u!114 &594188966 stripped
@@ -2680,6 +2689,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845872239}
   m_CullTransparentMesh: 1
+--- !u!1 &897247953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 897247954}
+  m_Layer: 0
+  m_Name: GrabPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &897247954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897247953}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0.0025}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 594188969}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &915312097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4800,7 +4840,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5493275
+  m_Radius: 2.25
   m_Center: {x: 0.049327493, y: 4.78693e-16, z: -3.2198422e-17}
 --- !u!114 &1769341454
 MonoBehaviour:
@@ -5683,7 +5723,7 @@ MonoBehaviour:
   _maxSpawnInterval: 6
   _minSpawnInterval: 3
   _maxSpawnEnemies: 5
-  _speedGrowth: 0.1
+  _speedGrowth: 0.05
   _noHitMoleSpawnRate: 0.3
   _goldenMoleSpawnRate: 0.15
   _healthMoleSpawnRate: 0.05
