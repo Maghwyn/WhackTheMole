@@ -868,14 +868,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.001
+  m_Height: 0.0025
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.0008}
 --- !u!114 &2633764467869564654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upSpeed: 15
   _downSpeed: 5
+  _max_speed: 25
 --- !u!114 &-2361187610699954328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,7 +929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621cebc64edc34f37819fa0c1accc78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _miniGameDataManager: {fileID: 0}
   _bonkParticles: {fileID: 5024009746357069192, guid: ec3f674830402cc45bce805cf6493db7,
     type: 3}
 --- !u!1 &8088437003865399841
