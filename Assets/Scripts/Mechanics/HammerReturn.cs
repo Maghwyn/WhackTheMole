@@ -47,7 +47,7 @@ public class HammerReturn : MonoBehaviour
 		while (true)
 		{
 			float distance = Vector3.Distance(_socket.transform.position, _hammer.transform.position);
-			if (distance > 20f)
+			if (distance > 5f)
 			{
 				_socket.StartManualInteraction(_hammer as IXRSelectInteractable);
 			}
