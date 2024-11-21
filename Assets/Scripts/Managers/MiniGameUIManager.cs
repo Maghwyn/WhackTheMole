@@ -9,6 +9,7 @@ public class MiniGameUIManager : MonoBehaviour
 	[Header("Event UI")]
 	[SerializeField] private GameObject _startingMessageUI;
 	[SerializeField] private GameObject _restartUI;
+	[SerializeField] private GameObject _respawnHammerUI;
 
 	[Header("Message UI")]
 	[SerializeField] private GameObject _gameMessageUI;
@@ -34,6 +35,7 @@ public class MiniGameUIManager : MonoBehaviour
 		ToggleStartingMessage(false);
 		ToggleGameMessage(false);
 		ToggleRestartUI(false);
+		ToggleRespawnHammerUI(false);
 		ShowGameUI();
 	}
 
@@ -59,6 +61,8 @@ public class MiniGameUIManager : MonoBehaviour
 		ToggleGameMessage(true);
 		_gameMessageText.text = "Paused";
 		_gameMessageBackground.color = _colorRed;
+
+		ToggleRespawnHammerUI(true);
 	}
 
 	public void ShowRestartUI()
@@ -80,12 +84,14 @@ public class MiniGameUIManager : MonoBehaviour
 	public void StartNewGameCountdown()
 	{
 		ToggleGameMessage(true);
+		ToggleRespawnHammerUI(false);
 		_newGameCountdownCoroutine = StartCoroutine(StartingNewGameCoroutine());
 	}
 
 	public void StartResumeCountdown()
 	{
 		ToggleGameMessage(true);
+		ToggleRespawnHammerUI(false);
 		_resumeCountdownCoroutine = StartCoroutine(ResumingGameCoroutine());
 	}
 
@@ -173,5 +179,10 @@ public class MiniGameUIManager : MonoBehaviour
 	private void ToggleRestartUI(bool value)
 	{
 		_restartUI.SetActive(value);
+	}
+
+	private void ToggleRespawnHammerUI(bool value)
+	{
+		_respawnHammerUI.SetActive(value);
 	}
 }
