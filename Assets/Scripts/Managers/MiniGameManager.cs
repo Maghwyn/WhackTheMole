@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class MiniGameManager : MonoBehaviour
 	private MiniGameDataManager _miniGameDataManager;
 	private bool _isGamePaused = false;
 	private bool _isGameRunning = false;
+	private Coroutine _forceReturnHammerCoroutine;
 
 	private void Awake()
 	{
@@ -42,6 +44,12 @@ public class MiniGameManager : MonoBehaviour
 	private void PostEndGame()
 	{
 		// Make sure everything is reset even if it's unnecessary as it's "safe" anyway.
+
+		if (_forceReturnHammerCoroutine != null)
+		{
+			StopCoroutine(_forceReturnHammerCoroutine);
+			_forceReturnHammerCoroutine = null;
+		}
 
 		_hammerEvent.OnHammerHandGrab -= InitMiniGame;
 		_hammerEvent.OnHammerHandGrab -= ResumeMiniGame;
@@ -108,6 +116,12 @@ public class MiniGameManager : MonoBehaviour
 
 	private void ResumeMiniGame()
 	{
+		if (_forceReturnHammerCoroutine != null)
+		{
+			StopCoroutine(_forceReturnHammerCoroutine);
+			_forceReturnHammerCoroutine = null;
+		}
+
 		_miniGameUIManager.OnResumeGameComplete += RunMiniGame;
 		_miniGameUIManager.StartResumeCountdown();
 	}
@@ -126,6 +140,8 @@ public class MiniGameManager : MonoBehaviour
 
 		_miniGameUIManager.ForceStopNewGameCountdownIfRunning();
 		_miniGameUIManager.ShowPauseMessage();
+
+		_forceReturnHammerCoroutine = StartCoroutine(ForceHammerReturnAfterDelay());
 	}
 
 	public void OnRestartMiniGame()
@@ -142,5 +158,17 @@ public class MiniGameManager : MonoBehaviour
 			_hammerEvent.OnHammerHandGrab += InitMiniGame;
 			_miniGameUIManager.ShowStartingMessage();
 		}
+	}
+
+	private IEnumerator ForceHammerReturnAfterDelay()
+	{
+		yield return new WaitForSeconds(5f);
+
+		if (!_hammerEvent.isGrabbedByHand)
+		{
+			_hammerReturn.ForceReturnToSocket();
+		}
+
+		_forceReturnHammerCoroutine = null;
 	}
 }
