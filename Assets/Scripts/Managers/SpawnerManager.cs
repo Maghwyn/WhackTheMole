@@ -61,6 +61,8 @@ public class SpawnerManager : MonoBehaviour
 
 	private void OnEnable()
 	{
+		_currentSpawnInterval = _maxSpawnInterval;
+		_speedMultiplier = 1f;
 		StartTask();
 	}
 
