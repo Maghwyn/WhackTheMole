@@ -75,6 +75,11 @@ public class MiniGameUIManager : MonoBehaviour
 		ToggleRestartUI(false);
 	}
 
+	public void HideRespawnHammerUI()
+	{
+		ToggleRespawnHammerUI(false);
+	}
+
 	public void UpdateFinalScoreText(int score)
 	{
 		string point = score > 0 ? "points" : "point";
@@ -84,14 +89,14 @@ public class MiniGameUIManager : MonoBehaviour
 	public void StartNewGameCountdown()
 	{
 		ToggleGameMessage(true);
-		ToggleRespawnHammerUI(false);
+		HideRespawnHammerUI();
 		_newGameCountdownCoroutine = StartCoroutine(StartingNewGameCoroutine());
 	}
 
 	public void StartResumeCountdown()
 	{
 		ToggleGameMessage(true);
-		ToggleRespawnHammerUI(false);
+		HideRespawnHammerUI();
 		_resumeCountdownCoroutine = StartCoroutine(ResumingGameCoroutine());
 	}
 

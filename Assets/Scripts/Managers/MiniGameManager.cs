@@ -169,6 +169,13 @@ public class MiniGameManager : MonoBehaviour
 			_hammerReturn.ForceReturnToSocket();
 		}
 
+		_miniGameUIManager.HideRespawnHammerUI();
 		_forceReturnHammerCoroutine = null;
+	}
+
+	public void ForceReturnToSocketAndHideUI()
+	{
+		_hammerReturn.ForceReturnToSocket();
+		_miniGameUIManager.HideRespawnHammerUI();
 	}
 }

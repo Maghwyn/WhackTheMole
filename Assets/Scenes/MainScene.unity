@@ -3124,8 +3124,8 @@ Transform:
   m_GameObject: {fileID: 419813344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.66, z: -0.75}
-  m_LocalScale: {x: 0.75, y: 0.3, z: 0.75}
+  m_LocalPosition: {x: 0, y: -0.601, z: -0.75}
+  m_LocalScale: {x: 0.75, y: 0.1, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 784363787}
@@ -10048,9 +10048,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1769341454}
-        m_TargetAssemblyTypeName: HammerReturn, Assembly-CSharp
-        m_MethodName: ForceReturnToSocket
+      - m_Target: {fileID: 784363788}
+        m_TargetAssemblyTypeName: MiniGameManager, Assembly-CSharp
+        m_MethodName: ForceReturnToSocketAndHideUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
