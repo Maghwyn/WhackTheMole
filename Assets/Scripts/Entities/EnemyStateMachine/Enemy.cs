@@ -15,6 +15,10 @@ public class Enemy: MonoBehaviour, IEnemy
 	public EnemyMovementMechanic movement { get ; protected set; }
 	#endregion
 
+	#region PHYSICS
+	private Collider _collider;
+	#endregion
+
 	#region FLAGS
 	protected bool isFrozen = false;
 	#endregion
@@ -36,6 +40,7 @@ public class Enemy: MonoBehaviour, IEnemy
 	{
 		stateMachine = new EnemyStateMachine();
 		movement = GetComponent<EnemyMovementMechanic>();
+		_collider = GetComponent<Collider>();
 	}
 
 	protected virtual void Start() {}
@@ -61,11 +66,13 @@ public class Enemy: MonoBehaviour, IEnemy
 	public void Freeze()
 	{
 		isFrozen = true;
+		_collider.enabled = false;
 	}
 
 	public void UnFreeze()
 	{
 		isFrozen = false;
+		_collider.enabled = true;
 	}
 	#endregion
 

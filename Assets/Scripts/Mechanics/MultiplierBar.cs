@@ -86,6 +86,6 @@ public class MultiplierBar : MonoBehaviour
 
 	private void UpdateComboText()
 	{
-		_multiplierText.text = $"{_gameCombo.value}";
+		_comboText.text = $"{_gameCombo.value}";
 	}
 }

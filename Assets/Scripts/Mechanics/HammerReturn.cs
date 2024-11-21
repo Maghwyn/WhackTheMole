@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -10,6 +11,7 @@ public class HammerReturn : MonoBehaviour
 
 	private XRSocketInteractor _socket;
 	private Coroutine _returnToSocketCoroutine;
+	public event Action OnSocketReturn;
 
 	public bool isSnapped => _socket.isPerformingManualInteraction;
 
@@ -50,6 +52,7 @@ public class HammerReturn : MonoBehaviour
 			if (distance > 5f)
 			{
 				_socket.StartManualInteraction(_hammer as IXRSelectInteractable);
+				OnSocketReturn?.Invoke();
 			}
 			yield return new WaitForSeconds(_hammerDistanceCheckingInterval);
 		}
@@ -58,5 +61,6 @@ public class HammerReturn : MonoBehaviour
 	public void ForceReturnToSocket()
 	{
 		_socket.StartManualInteraction(_hammer as IXRSelectInteractable);
+		OnSocketReturn?.Invoke();
 	}
 }

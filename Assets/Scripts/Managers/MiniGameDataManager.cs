@@ -33,7 +33,7 @@ public class MiniGameDataManager : MonoBehaviour
 		new() { multiplierValue = 32f, hitsNeeded = 150, penaltyReduction = 0.70f },
 	};
 
-	[SerializeField] private float _comboTimeWindow = 2.5f;
+	[SerializeField] private float _comboTimeWindow = 7.5f;
 
 	[Header("Sounds")]
 	[SerializeField] private AudioClip _bonkHitClip;
@@ -41,8 +41,29 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private float _lastHitTime;
 	private int _currentTier = 0;
+	private float _pausedTimeDifference = 0f;
 	public bool isOutOfHealth => _gameHP.value <= 0;
 	public int score => _gameScore.value;
+	public bool isPaused
+	{
+		get => _isPaused;
+		set
+		{
+			if (value != _isPaused)
+			{
+				_isPaused = value;
+				if (_isPaused)
+				{
+					_pausedTimeDifference = Time.time - _lastHitTime;
+				}
+				else
+				{
+					_lastHitTime = Time.time + _pausedTimeDifference;
+				}
+			}
+		}
+	}
+	private bool _isPaused = false;
 
 	private void OnEnable()
 	{
@@ -59,7 +80,7 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (Time.time - _lastHitTime > _comboTimeWindow && _gameCombo.value > 0)
+		if (!isPaused && Time.time - _lastHitTime > _comboTimeWindow && _gameCombo.value > 0)
 		{
 			ResetCombo();
 		}
