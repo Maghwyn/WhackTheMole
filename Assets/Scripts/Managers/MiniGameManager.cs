@@ -28,6 +28,7 @@ public class MiniGameManager : MonoBehaviour
 
 		_teleportEvent.OnAnchorEnter += PreInitGame;
 		_teleportEvent.OnAnchorExit += PostEndGame;
+		_hammerReturn.OnSocketReturn += _miniGameUIManager.HideRespawnHammerUI;
 	}
 
 	private void Start()
@@ -169,13 +170,11 @@ public class MiniGameManager : MonoBehaviour
 			_hammerReturn.ForceReturnToSocket();
 		}
 
-		_miniGameUIManager.HideRespawnHammerUI();
 		_forceReturnHammerCoroutine = null;
 	}
 
 	public void ForceReturnToSocketAndHideUI()
 	{
 		_hammerReturn.ForceReturnToSocket();
-		_miniGameUIManager.HideRespawnHammerUI();
 	}
 }
