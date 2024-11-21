@@ -33,7 +33,7 @@ public class MiniGameDataManager : MonoBehaviour
 		new() { multiplierValue = 32f, hitsNeeded = 150, penaltyReduction = 0.70f },
 	};
 
-	[SerializeField] private float _comboTimeWindow = 2.5f;
+	[SerializeField] private float _comboTimeWindow = 7.5f;
 
 	[Header("Sounds")]
 	[SerializeField] private AudioClip _bonkHitClip;
