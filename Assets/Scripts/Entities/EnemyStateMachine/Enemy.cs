@@ -16,7 +16,7 @@ public class Enemy: MonoBehaviour, IEnemy
 	#endregion
 
 	#region PHYSICS
-	private Collider2D _collider;
+	private Collider _collider;
 	#endregion
 
 	#region FLAGS
@@ -40,7 +40,7 @@ public class Enemy: MonoBehaviour, IEnemy
 	{
 		stateMachine = new EnemyStateMachine();
 		movement = GetComponent<EnemyMovementMechanic>();
-		_collider = GetComponent<Collider2D>();
+		_collider = GetComponent<Collider>();
 	}
 
 	protected virtual void Start() {}
