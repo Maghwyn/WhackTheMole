@@ -107,6 +107,7 @@ public class MiniGameManager : MonoBehaviour
 
 		if (_isGamePaused)
 		{
+			_miniGameDataManager.isPaused = false;
 			_miniGameUIManager.OnResumeGameComplete -= RunMiniGame;
 			_spawnerManager.ResumeSpawAndInteraction();
 		}
@@ -136,7 +137,9 @@ public class MiniGameManager : MonoBehaviour
 			return;
 		}
 
+
 		_isGamePaused = true;
+		_miniGameDataManager.isPaused = true;
 		_spawnerManager.PauseSpawnAndInteraction();
 
 		_miniGameUIManager.ForceStopNewGameCountdownIfRunning();
