@@ -9,6 +9,9 @@ This game is a school project designed to demonstrate game development VR basic 
 3. Grab the hammer.
 4. Enjoy !
 
+## How to Quit
+1. Look to your right, there's a red "EXIT" with a platform you can teleport on.
+
 ## Moles
 - Angel Mole : Give 1 HP & No loss of HP on despawn.
 - White Flag Mole : Remove 1 HP && No loss of HP on despawn.
@@ -27,9 +30,6 @@ This game is a school project designed to demonstrate game development VR basic 
 - Moles cannot be hit once the mini-game is paused.
 - Environmental feedback, static moles and plants are moving.
 - SFX & VFX & Skybox & Map & Fog & Bloom.
-
-## How to Quit
-1. Look to your right, there's a red "EXIT" with a platform you can TP on.
 
 ## Contributors
 - [Maghwyn](https://github.com/Maghwyn)
