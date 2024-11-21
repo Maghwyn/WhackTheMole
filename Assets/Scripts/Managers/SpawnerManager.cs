@@ -18,13 +18,13 @@ public class SpawnerManager : MonoBehaviour
 	[Header("General Settings")]
 	[SerializeField] private List<MoleHole> _molesHoles = new();
 	[SerializeField] private float _maxSpawnInterval = 2f;
-	[SerializeField] private float _minSpawnInterval = 0.5f;
+	[SerializeField] private float _minSpawnInterval = 0.75f;
 	[SerializeField] private int _maxSpawnEnemies = 5;
 	[SerializeField] private float _speedGrowth = 0.05f;
 	[SerializeField] private static float _speedMultiplier = 1f;
 
 	[Header("Spawn Rates")]
-	[SerializeField] private float _noHitMoleSpawnRate = 0.3f;
+	[SerializeField] private float _noHitMoleSpawnRate = 0.2f;
 	[SerializeField] private float _goldenMoleSpawnRate = 0.15f;
 	[SerializeField] private float _healthMoleSpawnRate = 0.05f;
 
