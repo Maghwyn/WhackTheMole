@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
 
 	private void Update()
 	{
-		float value = _gameHP.value / 5;
+		float value = _gameHP.value / 5f;
 		if (_healthBarFill.fillAmount == value) return;
 
 		_healthBarFill.fillAmount = value;

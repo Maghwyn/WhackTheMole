@@ -25,7 +25,7 @@ public class HighScoreManager : MonoBehaviour
 	{
 		LoadScores();
 		ClearScoreBoards();
-		PopulateScoreBoard();
+		StartCoroutine(PopulateScoreBoard());
 	}
 
 	public void LoadScores()
@@ -56,33 +56,26 @@ public class HighScoreManager : MonoBehaviour
 
 		SaveScores();
 		ClearScoreBoards();
-		PopulateScoreBoard();
+		StartCoroutine(PopulateScoreBoard());
 	}
 
 	private void ClearScoreBoards()
 	{
-
-		while (_topScoreBox.childCount > 0)
+		for (int i = 0; i < _topScoreBox.childCount; i++)
 		{
-			#if UNITY_EDITOR
-				DestroyImmediate(_topScoreBox.GetChild(0).gameObject);
-			#else
-				Destroy(_topScoreBox.GetChild(0).gameObject);
-			#endif
+			Destroy(_topScoreBox.GetChild(i).gameObject);
 		}
 
-		while (_otherScoreBox.childCount > 0)
+		for (int i = 0; i < _otherScoreBox.childCount; i++)
 		{
-			#if UNITY_EDITOR
-				DestroyImmediate(_otherScoreBox.GetChild(0).gameObject);
-			#else
-				Destroy(_otherScoreBox.GetChild(0).gameObject);
-			#endif
+			Destroy(_otherScoreBox.GetChild(i).gameObject);
 		}
 	}
 
-	private void PopulateScoreBoard()
+	private System.Collections.IEnumerator PopulateScoreBoard()
 	{
+		yield return null;
+
 		for (int i = 0; i < _scoreList.scores.Count; i++)
 		{
 			Transform targetParent = i < 3 ? _topScoreBox : _otherScoreBox;

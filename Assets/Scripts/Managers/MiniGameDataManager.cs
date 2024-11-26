@@ -11,7 +11,7 @@ public class MultiplierTier
 public class MiniGameDataManager : MonoBehaviour
 {
 	[Header("Game Base Data")]
-	[SerializeField] private int _defaultGameHP = 5;
+	[SerializeField] private float _defaultGameHP = 5f;
 	[SerializeField] private int _defaultGameScore = 0;
 	[SerializeField] private float _defaultGameMultiplier = 1;
 	[SerializeField] private int _defaultGameCombo = 0;
@@ -42,7 +42,7 @@ public class MiniGameDataManager : MonoBehaviour
 	private float _lastHitTime;
 	private int _currentTier = 0;
 	private float _pausedTimeDifference = 0f;
-	public bool isOutOfHealth => _gameHP.value <= 0;
+	public bool isOutOfHealth => _gameHP.value <= 0f;
 	public int score => _gameScore.value;
 	public bool isPaused
 	{
@@ -133,8 +133,8 @@ public class MiniGameDataManager : MonoBehaviour
 
 	private void HandleHealthMole(int baseScore)
 	{
-		if (_gameHP.value < 5)
-			_gameHP.ApplyChange(1);
+		if (_gameHP.value < 5f)
+			_gameHP.ApplyChange(1f);
 
 		_gameCombo.ApplyChange(1);
 		UpdateMultiplierTier();
@@ -188,7 +188,7 @@ public class MiniGameDataManager : MonoBehaviour
 		float currentMultiplier = _gameMultiplier.value;
 		float reduction = _multiplierTiers[_currentTier].penaltyReduction;
 		
-		_gameHP.ApplyChange(-1);
+		_gameHP.ApplyChange(-1f);
 		_gameMultiplier.SetValue(Mathf.Max(1f, currentMultiplier * reduction));
 		_gameCombo.SetValue(0);
 	}
@@ -213,7 +213,7 @@ public class MiniGameDataManager : MonoBehaviour
 
 	public void ResetMiniGameData()
 	{
-		_gameHP.SetValue(5);
+		_gameHP.SetValue(5f);
 		_gameScore.SetValue(0);
 		ResetCombo();
 	}
